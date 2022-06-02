@@ -1,108 +1,75 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Scripts/Character Selector.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Knight-Sheet.png" type="Texture" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 32, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2( 96, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 2 )
-region = Rect2( 32, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
-region = Rect2( 96, 32, 32, 32 )
-
-[sub_resource type="SpriteFrames" id=10]
-animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "Walk",
-"speed": 8.0
-}, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 2.0
-} ]
-
-[sub_resource type="SpriteFrames" id=11]
-animations = [ {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[node name="Character Selector" type="CanvasLayer"]
+[node name="Character Selector" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 1 )
 
-[node name="Panel" type="Panel" parent="."]
+[node name="p1Pos" type="Position2D" parent="."]
+position = Vector2( 191, 208 )
+
+[node name="p2Pos" type="Position2D" parent="."]
+position = Vector2( 843, 208 )
+
+[node name="pSoloPos" type="Position2D" parent="."]
+position = Vector2( 521, 208 )
+
+[node name="p1Selector" type="Node2D" parent="."]
 pause_mode = 2
-margin_left = 95.0
-margin_top = 77.0
-margin_right = 932.0
-margin_bottom = 505.0
+position = Vector2( -249, 224 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="p1Selector" type="Panel" parent="Panel"]
+[node name="p1Selector" type="Panel" parent="p1Selector"]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 120.0
-margin_top = 131.0
-margin_right = 263.0
-margin_bottom = 284.0
+margin_left = -70.0
+margin_top = -77.0
+margin_right = 73.0
+margin_bottom = 76.0
 
-[node name="p1Left" type="Button" parent="Panel"]
-margin_left = 78.0
-margin_top = 194.0
-margin_right = 102.0
-margin_bottom = 215.0
+[node name="p1Left" type="Button" parent="p1Selector"]
+margin_left = -112.0
+margin_top = -14.0
+margin_right = -88.0
+margin_bottom = 7.0
 text = "<"
 
-[node name="p1Right" type="Button" parent="Panel"]
-margin_left = 281.0
-margin_top = 194.0
-margin_right = 305.0
-margin_bottom = 215.0
+[node name="p1Right" type="Button" parent="p1Selector"]
+margin_left = 91.0
+margin_top = -14.0
+margin_right = 115.0
+margin_bottom = 7.0
 text = ">"
 
-[node name="Options" type="Node2D" parent="Panel"]
+[node name="p2Selector" type="Node2D" parent="."]
+pause_mode = 2
+position = Vector2( -254, 450 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="KnightAnimatedSprite" type="AnimatedSprite" parent="Panel/Options"]
-position = Vector2( 197, 177 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 10 )
-animation = "Idle"
-playing = true
+[node name="p2Selector" type="Panel" parent="p2Selector"]
+modulate = Color( 0.14902, 0, 1, 1 )
+margin_left = -70.0
+margin_top = -77.0
+margin_right = 73.0
+margin_bottom = 76.0
 
-[node name="GodotAnimatedSprite" type="AnimatedSprite" parent="Panel/Options"]
-position = Vector2( 197, 205 )
-scale = Vector2( 1.14063, 1.14063 )
-frames = SubResource( 11 )
-playing = true
+[node name="p2Left" type="Button" parent="p2Selector"]
+margin_left = -112.0
+margin_top = -14.0
+margin_right = -88.0
+margin_bottom = 7.0
+text = "<"
+
+[node name="p2Right" type="Button" parent="p2Selector"]
+margin_left = 91.0
+margin_top = -14.0
+margin_right = 115.0
+margin_bottom = 7.0
+text = ">"
 
 [node name="ReadyButton" type="Button" parent="."]
 pause_mode = 2
@@ -111,6 +78,8 @@ margin_top = 458.0
 margin_right = 555.0
 margin_bottom = 489.0
 
-[connection signal="pressed" from="Panel/p1Left" to="." method="_on_p1Left_pressed"]
-[connection signal="pressed" from="Panel/p1Right" to="." method="_on_p1Right_pressed"]
+[connection signal="pressed" from="p1Selector/p1Left" to="." method="_on_p1Left_pressed"]
+[connection signal="pressed" from="p1Selector/p1Right" to="." method="_on_p1Right_pressed"]
+[connection signal="pressed" from="p2Selector/p2Left" to="." method="_on_p2Left_pressed"]
+[connection signal="pressed" from="p2Selector/p2Right" to="." method="_on_p2Right_pressed"]
 [connection signal="pressed" from="ReadyButton" to="." method="_on_ReadyButton_pressed"]

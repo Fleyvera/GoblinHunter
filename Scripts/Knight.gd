@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
-var player2
+var inGame = false
+
+export var player2 = false
 
 var speed = 350
 var dir = Vector2()
@@ -14,7 +16,8 @@ func _ready():
 
 func _process(delta):
 	
-	Move(delta)
+	if inGame:
+		Move(delta)
 	
 	Anim()
 	
@@ -29,7 +32,7 @@ func Move(delta):
 	
 	dir = Vector2()
 	
-	if get_node_or_null("Player2") == null:
+	if player2 == false:
 		
 		if Input.is_action_pressed("Left"):
 			dir += Vector2(-1 , 0)
