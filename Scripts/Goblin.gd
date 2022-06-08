@@ -38,9 +38,9 @@ func Follow(delta):
 		playerPos = players.get_child(0).position
 		
 		if players.get_child(0).position > position:
-			get_node("Sprite").scale.x = -1
+			get_node("AnimatedSprite").flip_h = false
 		else:
-			get_node("Sprite").scale.x = 1
+			get_node("AnimatedSprite").flip_h = true
 		
 		
 	if Global.players == 2:
@@ -52,17 +52,17 @@ func Follow(delta):
 			
 			playerPos = players.get_child(0).position
 			if players.get_child(0).position > position:
-				get_node("Sprite").scale.x = -1
+				get_node("AnimatedSprite").flip_h = false
 			else:
-				get_node("Sprite").scale.x = 1
+				get_node("AnimatedSprite").flip_h = true
 			
 		else:
 			
 			playerPos = players.get_child(1).position
 			if players.get_child(1).position > position:
-				get_node("Sprite").scale.x = -1
+				get_node("AnimatedSprite").flip_h = false
 			else:
-				get_node("Sprite").scale.x = 1
+				get_node("AnimatedSprite").flip_h = true
 		
 		
 	var dir = (playerPos - position).normalized()
