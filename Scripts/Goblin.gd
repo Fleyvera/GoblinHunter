@@ -1,12 +1,17 @@
 extends KinematicBody2D
 
+var dmgCD = false
+
+
 #Enemy attributes
 export (int) var speed
 
+var life = 20
 
 
 #Follow Sistem
 onready var players = get_node("../Players")
+
 
 
 
@@ -21,6 +26,7 @@ func _ready():
 func _process(delta):
 	
 	Follow(delta)
+	
 	
 	pass
 
@@ -74,4 +80,57 @@ func Follow(delta):
 	
 	
 	pass
+
+
+
+func _on_Area2D_area_entered(area):
+	
+	if area.is_in_group("Weapon") and dmgCD == false:
+		
+		print(life)
+		
+		dmgCD = true
+		life -= area.get_parent().damage
+		$ShowDamage.ShowDamage(area.get_parent().damage)
+		Death()
+		$DmgCDTimer.start()
+	
+	pass # Replace with function body.
+
+
+func _on_DmgCDTimer_timeout():
+	#Timer que calcula o tempo para tomar dano dnv
+	dmgCD = false
+	
+	pass 
+
+
+
+
+func Death():
+	
+	if life <= 0:
+		
+		$DeathTimer.start()
+		$AnimatedSprite.play("Death")
+		speed = 0
+		$Area2D/CollisionShape2D.set_deferred("disabled",true)
+		$CollisionShape2D.set_deferred("disabled",true)
+		
+		pass
+	
+	pass
+
+
+
+
+func _on_DeathTimer_timeout():
+	
+	queue_free()
+	
+	pass
+
+
+
+
 

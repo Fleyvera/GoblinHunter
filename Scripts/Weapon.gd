@@ -1,7 +1,7 @@
 extends Node2D
 
 
-var wpPool = preload("res://Prefabs/WaponsPool.tscn")
+var wpPool = preload("res://Prefabs/WeaponsPool.tscn")
 
 export var weapon_num = 0
 

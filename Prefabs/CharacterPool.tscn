@@ -69,6 +69,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -8 )
 frames = SubResource( 10 )
 animation = "Walk"
+frame = 1
 playing = true
 
 [node name="Weapon" type="Node2D" parent="Knight"]
@@ -87,5 +88,4 @@ modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0, -8 )
 frames = SubResource( 10 )
 animation = "Walk"
-frame = 3
 playing = true
