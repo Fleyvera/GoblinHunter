@@ -17,6 +17,8 @@ onready var players = get_node("../Players")
 
 func _ready():
 	
+	SetupLifeBar()
+	
 	pass 
 
 
@@ -26,7 +28,7 @@ func _ready():
 func _process(delta):
 	
 	Follow(delta)
-	
+	ProcessLifeBar()
 	
 	pass
 
@@ -85,6 +87,7 @@ func Follow(delta):
 
 func _on_Area2D_area_entered(area):
 	
+	#Acoes quando tomar dano
 	if area.is_in_group("Weapon") and dmgCD == false:
 		
 		print(life)
@@ -105,14 +108,13 @@ func _on_DmgCDTimer_timeout():
 	pass 
 
 
-
-
 func Death():
+	#Tudo que precisa para morrer
 	
 	if life <= 0:
 		
 		$XpDropper.call_deferred("Drop")
-		$DeathTimer.start()
+		$DeathTimer.start() #ativa timer morte
 		$AnimatedSprite.play("Death")
 		speed = 0
 		$Area2D/CollisionShape2D.set_deferred("disabled",true)
@@ -123,15 +125,26 @@ func Death():
 	pass
 
 
-
-
 func _on_DeathTimer_timeout():
-	
+	#acaba timer morte
 	queue_free()
 	
 	pass
 
+func SetupLifeBar():
+	
+	$LifeBar/LifeProgress.max_value = life
+	
+	pass
 
+
+func ProcessLifeBar():
+	
+	
+	
+	$LifeBar/LifeProgress.value = life
+	
+	pass
 
 
 

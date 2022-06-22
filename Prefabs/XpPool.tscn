@@ -41,3 +41,14 @@ region_rect = Rect2( 21.5955, 8.39469, 9.83141, 13.8767 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Xp/Area2D"]
 shape = SubResource( 1 )
+
+[node name="DropTimer" type="Timer" parent="Xp"]
+wait_time = 0.85
+one_shot = true
+
+[node name="PickTimer" type="Timer" parent="Xp"]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="Xp/DropTimer" to="Xp" method="_on_DropTimer_timeout"]
+[connection signal="timeout" from="Xp/PickTimer" to="Xp" method="_on_PickTimer_timeout"]

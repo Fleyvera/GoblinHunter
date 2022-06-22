@@ -60,8 +60,34 @@ func Drop():
 	randomize()
 	
 	apply_impulse(Vector2(0 , 0) , Vector2(rand_range(30 , -30) , -30))
-	yield(get_tree().create_timer(0.8) , "timeout")
-	mode = 1
+	$DropTimer.start()
+	
 	
 	
 	pass
+
+
+func _on_DropTimer_timeout():
+	
+	mode = 1
+	pass 
+
+
+
+func Follow(dir):
+	
+	set_deferred("mode" , 0)
+	print("ai")
+	linear_velocity = (dir - global_transform.origin) * 2
+	$PickTimer.start()
+	
+	pass
+
+
+func _on_PickTimer_timeout():
+	
+	
+	queue_free()
+	
+	
+	pass 

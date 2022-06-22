@@ -99,6 +99,7 @@ shape = SubResource( 16 )
 position = Vector2( 0, -10 )
 frames = SubResource( 15 )
 animation = "Walk"
+frame = 3
 playing = true
 
 [node name="DeathTimer" type="Timer" parent="Goblin"]
@@ -112,6 +113,16 @@ script = ExtResource( 4 )
 
 [node name="XpDropper" type="Node2D" parent="Goblin"]
 script = ExtResource( 5 )
+
+[node name="LifeBar" type="Node2D" parent="Goblin"]
+scale = Vector2( 0.3, 0.3 )
+
+[node name="LifeProgress" type="ProgressBar" parent="Goblin/LifeBar"]
+margin_left = -25.5556
+margin_top = 23.3333
+margin_right = 23.4444
+margin_bottom = 37.3333
+percent_visible = false
 
 [connection signal="area_entered" from="Goblin/Area2D" to="Goblin" method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="Goblin/DeathTimer" to="Goblin" method="_on_DeathTimer_timeout"]

@@ -32,7 +32,8 @@ func _on_Area2D_area_entered(area):
 		
 		#adiciona xp e deleta do mapa
 		xp += area.get_parent().xpAmount
-		area.get_parent().queue_free()
+		area.get_parent().Follow(get_parent().global_position)
+#		area.get_parent().queue_free()
 		
 	
 	

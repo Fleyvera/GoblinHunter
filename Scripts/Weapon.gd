@@ -23,6 +23,8 @@ func WeaponSpawner():
 	
 	var weapon = nWpPool.spawnWeapon(weapon_num)
 	
+#	weapon.scale = Vector2(10 ,10)
+	
 	add_child(weapon)
 	
 	pass
