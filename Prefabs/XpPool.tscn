@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Xp.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/XpShards.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/XpPool.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 7.28011
+
+[node name="XpPool" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Xp" type="RigidBody2D" parent="." groups=["Xp"]]
+z_index = -2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Little" type="Sprite" parent="Xp"]
+visible = false
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 1.72672, 11.5496, 7.33576, 8.57143 )
+
+[node name="Medium" type="Sprite" parent="Xp"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 11.9202, 10.9018, 6.95705, 9.4049 )
+
+[node name="Big" type="Sprite" parent="Xp"]
+visible = false
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 21.5955, 8.39469, 9.83141, 13.8767 )
+
+[node name="Area2D" type="Area2D" parent="Xp" groups=["Xp"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Xp/Area2D"]
+shape = SubResource( 1 )

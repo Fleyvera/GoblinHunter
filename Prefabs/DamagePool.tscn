@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/DamagePool.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/DamageNumBody.gd" type="Script" id=2]
+[ext_resource path="res://Fonts/alagard.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
 
 [node name="DamagePool" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,6 +21,8 @@ script = ExtResource( 2 )
 margin_top = 4.76837e-07
 margin_right = 16.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 0.686275, 0.337255, 0.337255, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "56"
 
 [node name="Timer" type="Timer" parent="DamageNumBody"]

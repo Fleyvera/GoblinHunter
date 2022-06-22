@@ -46,7 +46,7 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=10]
 radius = 13.0
 
-[node name="WaponsPool" type="Node2D"]
+[node name="WeaponsPool" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="BigSword" type="KinematicBody2D" parent="."]

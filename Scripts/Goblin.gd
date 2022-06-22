@@ -111,6 +111,7 @@ func Death():
 	
 	if life <= 0:
 		
+		$XpDropper.call_deferred("Drop")
 		$DeathTimer.start()
 		$AnimatedSprite.play("Death")
 		speed = 0
