@@ -108,7 +108,7 @@ func _on_p1Right_pressed():
 	
 	pass 
 
-
+#Mudando entre os personagens para seleiconar 
 func p2InvokeChar(valor):
 	
 	nCharacterPool = characterPool.instance()
@@ -123,6 +123,7 @@ func p2InvokeChar(valor):
 	
 	pass
 
+#Colocando o personagem selecionado no jogo
 func p2Instance():
 	
 	var realPlayer2 = player2.duplicate()
@@ -134,6 +135,8 @@ func p2Instance():
 	
 	pass
 
+
+#Selecionar o player dois
 func _on_p2Left_pressed():
 	
 	if charNum2 < charTotal:
@@ -141,9 +144,8 @@ func _on_p2Left_pressed():
 		charNum2 += 1
 		p2InvokeChar(charNum2)
 	
-	pass # Replace with function body.
-
-
+	pass
+#Selecionar o player dois
 func _on_p2Right_pressed():
 	
 	if charNum2 > 0:
@@ -152,11 +154,11 @@ func _on_p2Right_pressed():
 		p2InvokeChar(charNum2)
 	
 	
-	pass # Replace with function body.
+	pass 
 
 
 func JoyStickSelect():
-	
+	#Selecionar pelo controle
 	if Input.is_action_just_pressed("ArrowLeft"):
 		_on_p2Left_pressed()
 	elif Input.is_action_just_pressed("ArrowRight"):

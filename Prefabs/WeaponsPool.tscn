@@ -65,6 +65,7 @@ frames = SubResource( 8 )
 animation = "Attack"
 
 [node name="Timer" type="Timer" parent="BigSword"]
+wait_time = 3.0
 one_shot = true
 
 [connection signal="timeout" from="BigSword/Timer" to="BigSword" method="_on_Timer_timeout"]

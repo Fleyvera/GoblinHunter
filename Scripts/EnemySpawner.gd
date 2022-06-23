@@ -37,7 +37,7 @@ func EnemySpawner():
 func _on_EnemyTimer_timeout():
 	
 	randomize()
-	var time = rand_range(1 , 5)
+	var time = rand_range(0.5 , 1.5)
 	$EnemyTimer.wait_time = time
 	EnemySpawner()
 	

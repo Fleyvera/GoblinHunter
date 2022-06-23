@@ -2,6 +2,9 @@ extends RigidBody2D
 
 export (int) var xpAmount
 
+var isFollowing = false
+
+onready var players = get_node("../Players")
 
 func _ready():
 	
@@ -13,6 +16,9 @@ func _ready():
 
 
 func _process(delta):
+	
+	Follow(delta)
+	
 	pass
 
 
@@ -52,8 +58,6 @@ func XpAmount():
 
 
 
-
-
 func Drop():
 	
 	
@@ -73,21 +77,46 @@ func _on_DropTimer_timeout():
 	pass 
 
 
-
-func Follow(dir):
+func Follow(delta):
 	
-	set_deferred("mode" , 0)
-	print("ai")
-	linear_velocity = (dir - global_transform.origin) * 2
-	$PickTimer.start()
+	var speed = 300
+	var playerPos
+	var distance1 = 0
+	var distance2 = 0
+	
+	if isFollowing:
+		set_deferred("mode" , 3)
+		
+		if Global.players == 1:
+			
+			playerPos = players.get_child(0).position
+			
+			
+		if Global.players == 2:
+			
+			distance1 = players.get_child(0).position.distance_to(position)
+			distance2 = players.get_child(1).position.distance_to(position)
+			
+			if distance1 <= distance2:
+				
+				playerPos = players.get_child(0).position
+				
+			
+			else:
+				
+				playerPos = players.get_child(1).position
+				
+			
+		
+		
+		var dir = (playerPos - position).normalized()
+		
+		
+		var move = dir.normalized() * speed * delta
+		
+		position += move
+	
 	
 	pass
 
 
-func _on_PickTimer_timeout():
-	
-	
-	queue_free()
-	
-	
-	pass 

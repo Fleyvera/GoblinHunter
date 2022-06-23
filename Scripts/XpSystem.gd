@@ -4,6 +4,7 @@ var level = 0
 
 var xp = 0
 
+var inGame = false
 
 func _ready():
 	
@@ -16,35 +17,45 @@ func _ready():
 
 func _process(delta):
 	
+	isInGame()
+	
+	playerNumPos()
 	
 	XpSystem()
 	
 	pass
 
-
-func _on_Area2D_area_entered(area):
+func _on_DetectionArea_area_entered(area):
 	
+		
 	#Sistema de pegar xp
 	
 	if area.is_in_group("Xp"):
 		#Se for do grupo xp
 		
 		
-		#adiciona xp e deleta do mapa
-		xp += area.get_parent().xpAmount
-		area.get_parent().Follow(get_parent().global_position)
-#		area.get_parent().queue_free()
+		#xp começa a seguir
 		
+		area.get_parent().isFollowing = true
+
+		
+	pass 
+
+
+func _on_PickUpArea_area_entered(area):
 	
-	
+	if area.is_in_group("Xp"):
+		xp += area.get_parent().xpAmount
+		area.get_parent().queue_free()
+		
 	pass 
 
 
 
 func XpSystem():
 	
-	$CanvasLayer/ProgressBar.value = xp
-	$CanvasLayer/Label.set_text("Level " + str(level))
+	$CanvasLayer/Layer/ProgressBar.value = xp
+	$CanvasLayer/Layer/Label.set_text("Level " + str(level))
 	
 	
 	if xp >= 100:
@@ -54,3 +65,25 @@ func XpSystem():
 	
 	
 	pass
+
+#Determina a posicao da barra de xp pra cada player
+func playerNumPos():
+	
+	
+	if get_parent().player2 == true:
+		$CanvasLayer/Layer.position.y = 45
+	
+	
+	pass
+
+func isInGame():
+	
+	if get_parent().inGame == true and inGame == false:
+		inGame = true
+		pass
+	
+	if inGame:
+		$CanvasLayer/Layer.show()
+	
+	pass
+

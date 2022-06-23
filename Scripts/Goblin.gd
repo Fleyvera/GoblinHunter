@@ -8,6 +8,7 @@ export (int) var speed
 
 var life = 20
 
+var damage = 10
 
 #Follow Sistem
 onready var players = get_node("../Players")

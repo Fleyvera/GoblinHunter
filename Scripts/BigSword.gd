@@ -6,9 +6,9 @@ var inGame = false
 
 var attacking = false
 
-var damage = 10
+var damage = 20
 
-var speed = 0.7
+var speed = 3
 
 
 func _ready():
