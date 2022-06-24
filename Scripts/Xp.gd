@@ -6,6 +6,8 @@ var isFollowing = false
 
 onready var players = get_node("../Players")
 
+var speed = 10
+
 func _ready():
 	
 	XpAmount()
@@ -63,7 +65,7 @@ func Drop():
 	
 	randomize()
 	
-	apply_impulse(Vector2(0 , 0) , Vector2(rand_range(30 , -30) , -30))
+	apply_impulse(Vector2(0 , 0) , Vector2(rand_range(0 , 0) , -30))
 	$DropTimer.start()
 	
 	
@@ -79,7 +81,7 @@ func _on_DropTimer_timeout():
 
 func Follow(delta):
 	
-	var speed = 300
+	
 	var playerPos
 	var distance1 = 0
 	var distance2 = 0
@@ -111,6 +113,7 @@ func Follow(delta):
 		
 		var dir = (playerPos - position).normalized()
 		
+		speed += 10
 		
 		var move = dir.normalized() * speed * delta
 		

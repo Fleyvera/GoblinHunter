@@ -123,6 +123,8 @@ func _on_Area2D_area_entered(area):
 		life -= area.get_parent().damage
 		#Ativa cool down de dano
 		dmgCD = true
+		$Area2D/CollisionShape2D.set_deferred("disabled",true)
+		$AnimationPlayer.play("Hit")
 		$DmgCDTimer.start()
 	
 	
@@ -132,5 +134,7 @@ func _on_Area2D_area_entered(area):
 func _on_DmgCDTimer_timeout():
 	
 	dmgCD = false
+	$AnimationPlayer.play("Idle")
+	$Area2D/CollisionShape2D.set_deferred("disabled",false)
 	
 	pass 

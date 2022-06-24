@@ -114,7 +114,7 @@ func Death():
 	
 	if life <= 0:
 		
-		$XpDropper.call_deferred("Drop")
+		
 		$DeathTimer.start() #ativa timer morte
 		$AnimatedSprite.play("Death")
 		speed = 0
@@ -128,6 +128,7 @@ func Death():
 
 func _on_DeathTimer_timeout():
 	#acaba timer morte
+	$XpDropper.call_deferred("Drop")
 	queue_free()
 	
 	pass

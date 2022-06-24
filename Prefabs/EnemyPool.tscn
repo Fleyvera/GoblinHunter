@@ -99,6 +99,7 @@ shape = SubResource( 16 )
 position = Vector2( 0, -10 )
 frames = SubResource( 15 )
 animation = "Walk"
+frame = 1
 playing = true
 
 [node name="DeathTimer" type="Timer" parent="Goblin"]
