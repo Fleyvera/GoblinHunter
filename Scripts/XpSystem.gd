@@ -6,13 +6,25 @@ var xp = 0
 
 var inGame = false
 
+
+var upgradeSelector = preload("res://Prefabs/UpgradeSelector.tscn")
+
+
+
+
+
 func _ready():
-	
-	
-	
-	
 	pass 
 
+
+func UpgradeSelection():
+	
+	var nUpgradeSelector = upgradeSelector.instance()
+	
+	get_parent().add_child(nUpgradeSelector)
+	
+	get_tree().paused = true
+	pass
 
 
 func _process(delta):
@@ -62,7 +74,7 @@ func XpSystem():
 		
 		level += 1
 		xp = 0
-	
+		UpgradeSelection()
 	
 	pass
 
@@ -86,4 +98,6 @@ func isInGame():
 		$CanvasLayer/Layer.show()
 	
 	pass
+
+
 

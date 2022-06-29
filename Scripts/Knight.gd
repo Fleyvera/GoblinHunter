@@ -85,8 +85,10 @@ func Anim():
 
 	if dir != Vector2():
 		anim = "Walk"
+		$CPUParticles2D.emitting = true
 	else:
 		anim = "Idle"
+		$CPUParticles2D.emitting = false
 	get_node("AnimatedSprite").play(anim)
 	
 	

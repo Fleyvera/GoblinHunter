@@ -1,8 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Xp.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/XpShards.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/XpPool.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/XpPick1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/XpPick2.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 6.0
+} ]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.28011
@@ -25,6 +35,7 @@ region_enabled = true
 region_rect = Rect2( 1.72672, 11.5496, 7.33576, 8.57143 )
 
 [node name="Medium" type="Sprite" parent="Xp"]
+visible = false
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 region_enabled = true
@@ -36,6 +47,14 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 21.5955, 8.39469, 9.83141, 13.8767 )
+
+[node name="Picked" type="AnimatedSprite" parent="Xp"]
+visible = false
+position = Vector2( 0.334091, -0.479921 )
+scale = Vector2( 1.6, 1.6 )
+frames = SubResource( 2 )
+animation = "Idle"
+playing = true
 
 [node name="Area2D" type="Area2D" parent="Xp" groups=["Xp"]]
 

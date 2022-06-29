@@ -89,6 +89,13 @@ func Follow(delta):
 	if isFollowing:
 		set_deferred("mode" , 3)
 		
+		$Little.hide()
+		$Medium.hide()
+		$Big.hide()
+		$Picked.show()
+		
+		
+		
 		if Global.players == 1:
 			
 			playerPos = players.get_child(0).position
@@ -111,11 +118,14 @@ func Follow(delta):
 			
 		
 		
+		
 		var dir = (playerPos - position).normalized()
 		
 		speed += 10
 		
 		var move = dir.normalized() * speed * delta
+		
+		$Picked.look_at(playerPos)
 		
 		position += move
 	
