@@ -91,7 +91,7 @@ func _on_Area2D_area_entered(area):
 	#Acoes quando tomar dano
 	if area.is_in_group("Weapon") and dmgCD == false:
 		
-		print(life)
+		
 		
 		dmgCD = true
 		life -= area.get_parent().damage

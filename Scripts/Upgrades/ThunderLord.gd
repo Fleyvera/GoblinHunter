@@ -1,5 +1,7 @@
 extends Node2D
 
+var level = 1
+
 var damage = 20
 
 onready var player = get_parent().get_parent()
@@ -18,6 +20,8 @@ func _ready():
 func _process(delta):
 	
 	global_position = pos
+	
+	print(level)
 	
 	pass
 
