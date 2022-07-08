@@ -1,12 +1,40 @@
 extends Node2D
 
-var level = 1
+var level = 0
+var leveling = 0
+var percentage = 10
 
+
+#Atributos
 var damage = 20
+var speed = 2
+var area = 0.5
 
 onready var player = get_parent().get_parent()
 
 var pos = Vector2()
+
+
+func LevelingUpgrade():
+	
+	if leveling != level:
+		
+		#Damage
+		damage = damage / percentage * level + damage
+		
+		
+		#Speed
+		$Timer.wait_time = speed
+		speed = speed - (speed / percentage * level) 
+		
+		
+		#Range
+		scale = Vector2(area / percentage * level + area, area / percentage * level + area)
+		
+		leveling = level
+	
+	
+	pass
 
 
 func _ready():
@@ -17,13 +45,17 @@ func _ready():
 
 
 
+
 func _process(delta):
 	
 	global_position = pos
 	
-	print(level)
+	LevelingUpgrade()
+	
+	print(damage)
 	
 	pass
+
 
 
 func _on_Timer_timeout():

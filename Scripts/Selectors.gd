@@ -6,7 +6,6 @@ export(String) var upgrade_name = ""
 
 onready var upgrade = get_parent().get_parent().get_parent().get_parent().get_node("Upgrades").get_node_or_null(upgrade_name)
 
-var level
 
 #Sistema de spanwar upgrade
 var upPool = preload("res://Prefabs/UpgradePool.tscn")
@@ -17,7 +16,9 @@ export(int) var upgrade_num = 0
 
 func _ready():
 	
-	
+	#Modificando texto do upgrade com lv junto
+	if upgrade != null:
+		$Title.set_text(upgrade_name + " Lv: " + str(upgrade.level + 1))
 	
 	
 	pass 

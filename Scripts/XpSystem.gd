@@ -70,7 +70,7 @@ func XpSystem():
 	$CanvasLayer/Layer/Label.set_text("Level " + str(level))
 	
 	
-	if xp >= 100:
+	if xp >= 10:
 		
 		level += 1
 		xp = 0
