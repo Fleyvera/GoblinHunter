@@ -16,7 +16,7 @@ func _ready():
 
 func _process(delta):
 	
-	
+	$Positions.global_position = get_parent().get_node("CameraController").global_position
 	
 	
 	pass
@@ -29,13 +29,13 @@ func EnemySpawner():
 	
 	var enemy = nEnemyPool.spawnEnemy(enemy_num)
 	
-	var left = Vector2($Position2D.global_position.x , rand_range($Position2D.global_position.y , $Position2D2.global_position.y))
+	var left = Vector2($Positions/Position2D.global_position.x , rand_range($Positions/Position2D.global_position.y , $Positions/Position2D2.global_position.y))
 	
-	var bottom = Vector2(rand_range($Position2D2.global_position.x , $Position2D3.global_position.x) , $Position2D2.global_position.y)
+	var bottom = Vector2(rand_range($Positions/Position2D2.global_position.x , $Positions/Position2D3.global_position.x) , $Positions/Position2D2.global_position.y)
 	
-	var right = Vector2($Position2D3.global_position.x , rand_range($Position2D3.global_position.y , $Position2D4.global_position.y) )
+	var right = Vector2($Positions/Position2D3.global_position.x , rand_range($Positions/Position2D3.global_position.y , $Positions/Position2D4.global_position.y) )
 	
-	var top = Vector2(rand_range($Position2D4.global_position.x , $Position2D.global_position.x) , $Position2D.global_position.y)
+	var top = Vector2(rand_range($Positions/Position2D4.global_position.x , $Positions/Position2D.global_position.x) , $Positions/Position2D.global_position.y)
 	
 	#enemy.global_position = Vector2(rand_range(0 , get_viewport().size.x) , rand_range(0 , get_viewport().size.y))
 	

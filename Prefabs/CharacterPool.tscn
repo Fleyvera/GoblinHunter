@@ -255,7 +255,7 @@ visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 27 )
 animation = "Walk"
-frame = 2
+frame = 3
 playing = true
 
 [node name="DmgCDTimer" type="Timer" parent="Knight"]
@@ -320,7 +320,7 @@ visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 10 )
 animation = "Idle"
-frame = 2
+frame = 3
 playing = true
 
 [node name="DmgCDTimer" type="Timer" parent="Wizard"]

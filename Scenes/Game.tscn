@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Character Selector.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Players.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/CameraController.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/EnemySpawner.gd" type="Script" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
 
 [node name="Game" type="Node2D"]
 pause_mode = 1
@@ -18,29 +20,40 @@ script = ExtResource( 2 )
 pause_mode = 1
 script = ExtResource( 4 )
 
+[node name="Positions" type="Node2D" parent="EnemySpawner"]
+position = Vector2( 512, 292 )
+
+[node name="Position2D" type="Position2D" parent="EnemySpawner/Positions"]
+position = Vector2( -913, -540 )
+
+[node name="Position2D2" type="Position2D" parent="EnemySpawner/Positions"]
+position = Vector2( -913, 552 )
+
+[node name="Position2D3" type="Position2D" parent="EnemySpawner/Positions"]
+position = Vector2( 912, 552 )
+
+[node name="Position2D4" type="Position2D" parent="EnemySpawner/Positions"]
+position = Vector2( 912, -544 )
+
 [node name="EnemyTimer" type="Timer" parent="EnemySpawner"]
 autostart = true
-
-[node name="Position2D" type="Position2D" parent="EnemySpawner"]
-position = Vector2( -376, -255 )
-
-[node name="Position2D2" type="Position2D" parent="EnemySpawner"]
-position = Vector2( -376, 844 )
-
-[node name="Position2D3" type="Position2D" parent="EnemySpawner"]
-position = Vector2( 1424, 844 )
-
-[node name="Position2D4" type="Position2D" parent="EnemySpawner"]
-position = Vector2( 1424, -252 )
 
 [node name="ScaleTimer" type="Timer" parent="EnemySpawner"]
 wait_time = 30.0
 autostart = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 517, 281 )
+[node name="CameraController" type="Node2D" parent="."]
+position = Vector2( 512, 292 )
+script = ExtResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="CameraController"]
 current = true
 zoom = Vector2( 1.6, 1.6 )
+smoothing_enabled = true
+smoothing_speed = 3.0
+
+[node name="Icon" type="Sprite" parent="CameraController"]
+texture = ExtResource( 5 )
 
 [connection signal="timeout" from="EnemySpawner/EnemyTimer" to="EnemySpawner" method="_on_EnemyTimer_timeout"]
 [connection signal="timeout" from="EnemySpawner/ScaleTimer" to="EnemySpawner" method="_on_ScaleTimer_timeout"]

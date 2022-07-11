@@ -13,7 +13,10 @@ var dmgCD = false
 
 #Atributos
 var speed = 300
-var life = 50
+
+var maxLife = 50
+
+var life
 
 
 
@@ -97,6 +100,7 @@ func Anim():
 #Iniciando sistema de vida com a vida maxima
 func SetUpLifeSystem():
 	
+	life = maxLife
 	$LifeBar/LifeProgress.max_value = life
 	
 	pass

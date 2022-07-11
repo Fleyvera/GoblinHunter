@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Sprites/Upgrades/Thunder-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Upgrades/ThunderLord.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/UpgradePool.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/Upgrades/Shuriken.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/Upgrades/Ninja.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Upgrades/LifePotion.gd" type="Script" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -67,7 +68,7 @@ visible = false
 scale = Vector2( 3, 3 )
 frames = SubResource( 10 )
 animation = "Idle"
-frame = 7
+frame = 4
 playing = true
 
 [node name="Area2D" type="Area2D" parent="ThunderLord" groups=["Weapon"]]
@@ -157,6 +158,13 @@ visible = false
 position = Vector2( 50, 0 )
 texture = ExtResource( 4 )
 
+[node name="LifePotion" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="Timer" type="Timer" parent="LifePotion"]
+one_shot = true
+autostart = true
+
 [connection signal="body_entered" from="ThunderLord/Area2D" to="ThunderLord" method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="ThunderLord/Timer" to="ThunderLord" method="_on_Timer_timeout"]
 [connection signal="timeout" from="ThunderLord/TimerStop" to="ThunderLord" method="_on_TimerStop_timeout"]
@@ -164,3 +172,4 @@ texture = ExtResource( 4 )
 [connection signal="body_entered" from="Ninja/Area2D2" to="Ninja" method="_on_Area2D2_body_entered"]
 [connection signal="body_entered" from="Ninja/Area2D3" to="Ninja" method="_on_Area2D3_body_entered"]
 [connection signal="body_entered" from="Ninja/Area2D4" to="Ninja" method="_on_Area2D4_body_entered"]
+[connection signal="timeout" from="LifePotion/Timer" to="LifePotion" method="_on_Timer_timeout"]
