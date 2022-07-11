@@ -2,7 +2,7 @@ extends Node2D
 
 var upSelectorPool = preload("res://Prefabs/UpgradeSelectorPool.tscn")
 
-var upSelecQuantity = 0
+var upSelecQuantity = 1
 
 var selected = 1
 

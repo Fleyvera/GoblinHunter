@@ -17,7 +17,7 @@ position = Vector2( 521, 208 )
 
 [node name="p1Selector" type="Node2D" parent="."]
 pause_mode = 2
-position = Vector2( -249, 224 )
+position = Vector2( -2952, 224 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -45,7 +45,7 @@ text = ">"
 
 [node name="p2Selector" type="Node2D" parent="."]
 pause_mode = 2
-position = Vector2( -254, 450 )
+position = Vector2( -2957, 450 )
 __meta__ = {
 "_edit_group_": true
 }

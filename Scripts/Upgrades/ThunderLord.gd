@@ -88,3 +88,15 @@ func _on_TimerStop_timeout():
 	
 	
 	pass 
+
+
+func _on_Area2D_body_entered(body):
+	
+	if body.is_in_group("Enemy"):
+		
+		body.Damage(damage)
+		
+		pass
+	
+	
+	pass 

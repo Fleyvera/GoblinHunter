@@ -21,4 +21,26 @@ script = ExtResource( 4 )
 [node name="EnemyTimer" type="Timer" parent="EnemySpawner"]
 autostart = true
 
+[node name="Position2D" type="Position2D" parent="EnemySpawner"]
+position = Vector2( -376, -255 )
+
+[node name="Position2D2" type="Position2D" parent="EnemySpawner"]
+position = Vector2( -376, 844 )
+
+[node name="Position2D3" type="Position2D" parent="EnemySpawner"]
+position = Vector2( 1424, 844 )
+
+[node name="Position2D4" type="Position2D" parent="EnemySpawner"]
+position = Vector2( 1424, -252 )
+
+[node name="ScaleTimer" type="Timer" parent="EnemySpawner"]
+wait_time = 30.0
+autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 517, 281 )
+current = true
+zoom = Vector2( 1.6, 1.6 )
+
 [connection signal="timeout" from="EnemySpawner/EnemyTimer" to="EnemySpawner" method="_on_EnemyTimer_timeout"]
+[connection signal="timeout" from="EnemySpawner/ScaleTimer" to="EnemySpawner" method="_on_ScaleTimer_timeout"]

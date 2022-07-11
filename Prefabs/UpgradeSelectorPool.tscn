@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/UpgradeSelectorPool.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/alagard.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Sprites/Thunder-Sheet.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Upgrades/Thunder-Sheet.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Selectors.gd" type="Script" id=4]
+[ext_resource path="res://Sprites/Upgrades/Shuriken.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=11]
 outline_size = 2
@@ -48,4 +49,42 @@ margin_bottom = 20.0
 position = Vector2( 20, 20 )
 texture = ExtResource( 3 )
 region_enabled = true
+region_rect = Rect2( 133.549, 0.854416, 21.0759, 31.3211 )
+
+[node name="NinjaSelector" type="Node2D" parent="."]
+scale = Vector2( 3, 3 )
+script = ExtResource( 4 )
+upgrade_name = "Ninja"
+upgrade_num = 1
+
+[node name="Description" type="Label" parent="NinjaSelector"]
+margin_left = -52.3333
+margin_top = 22.3333
+margin_right = 157.667
+margin_bottom = 55.3333
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 11 )
+text = "Create a Shurinken
+"
+align = 1
+
+[node name="Title" type="Label" parent="NinjaSelector"]
+margin_left = -23.6667
+margin_top = -29.0
+margin_right = 71.3333
+margin_bottom = -14.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 11 )
+text = "Ninja"
+align = 1
+
+[node name="Panel" type="Panel" parent="NinjaSelector"]
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="Icon" type="Sprite" parent="NinjaSelector/Panel"]
+position = Vector2( 20, 20 )
+texture = ExtResource( 5 )
 region_rect = Rect2( 133.549, 0.854416, 21.0759, 31.3211 )

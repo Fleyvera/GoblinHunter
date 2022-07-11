@@ -30,7 +30,7 @@ func _process(delta):
 	
 	Follow(delta)
 	ProcessLifeBar()
-	
+	DamageCoolDown()
 	pass
 
 
@@ -85,21 +85,30 @@ func Follow(delta):
 	pass
 
 
-
-func _on_Area2D_area_entered(area):
+func Damage(damage):
 	
 	#Acoes quando tomar dano
-	if area.is_in_group("Weapon") and dmgCD == false:
-		
-		
-		
+	if dmgCD == false:
 		dmgCD = true
-		life -= area.get_parent().damage
-		$ShowDamage.ShowDamage(area.get_parent().damage)
+		life -= damage
+		$ShowDamage.ShowDamage(damage)
 		Death()
 		$DmgCDTimer.start()
 	
-	pass # Replace with function body.
+	
+	pass
+
+func DamageCoolDown():
+	
+	if dmgCD:
+		$Area2D/CollisionShape2D.disabled = true
+		speed = 0
+	else:
+		$Area2D/CollisionShape2D.disabled = false
+		speed = 100
+	
+	pass 
+
 
 
 func _on_DmgCDTimer_timeout():

@@ -6,7 +6,7 @@ var inGame = false
 
 var attacking = false
 
-var damage = 20
+var damage = 15
 
 var speed = 3
 
@@ -61,3 +61,16 @@ func attack():
 		$Area2D/CollisionShape2D.set_deferred("disabled",true)
 	
 	
+
+
+func _on_Area2D_body_entered(body):
+	
+	
+	if body.is_in_group("Enemy"):
+		
+		
+		body.call_deferred("Damage" , damage)
+	
+	
+	
+	pass 
