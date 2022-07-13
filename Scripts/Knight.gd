@@ -125,7 +125,7 @@ func LifeSystem():
 func _on_Area2D_area_entered(area):
 	
 	if area.is_in_group("Enemy") and dmgCD == false:
-		life -= area.get_parent().damage
+		life -= area.get_parent().enemyDamage
 		#Ativa cool down de dano
 		dmgCD = true
 		$Area2D/CollisionShape2D.set_deferred("disabled",true)

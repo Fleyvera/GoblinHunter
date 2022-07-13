@@ -2,7 +2,7 @@ extends Node2D
 
 var upSelectorPool = preload("res://Prefabs/UpgradeSelectorPool.tscn")
 
-var upSelecQuantity = 2 #3 upgrades ja que o array conta o 0
+var upSelecQuantity = 4  #5 upgrades ja que o array conta o 0
 
 var selected = 1
 
@@ -18,7 +18,7 @@ func _process(delta):
 	
 	Mouse()
 	MarkPos()
-	SelectByKeyboard()
+	SelectByKeyboardOrJoystick()
 	
 	
 	pass
@@ -70,7 +70,7 @@ func _on_Up3Area_area_entered(area):
 	pass # Replace with function body.
 
 
-func SelectByKeyboard():
+func SelectByKeyboardOrJoystick():
 	
 	if Input.is_action_just_pressed("Right") or Input.is_action_just_pressed("p2Right"):
 		if selected == 1:
@@ -84,15 +84,24 @@ func SelectByKeyboard():
 			selected = 2
 		elif selected == 2:
 			selected = 1
+	
+	if Input.is_action_just_pressed("Confirm"):
+		
+		_on_ConfirmButton_pressed()
+		
+	
+	pass
+
 
 func UpgradeSelectorSpawner():
 	
-	randomize()
+	
 	
 	var rng = RandomNumberGenerator.new()
 	
 	var nUpSelectorPool = upSelectorPool.instance()
 	
+	rng.randomize()
 	
 	#Sorteia primeiro UPGRADE
 	var upgradesSelector_num = rng.randi_range(0 , upSelecQuantity)
@@ -137,6 +146,9 @@ func UpgradeSelectorSpawner():
 
 func _on_ConfirmButton_pressed():
 	
+	get_parent().get_node("XpSystem").PushEnemy()
+	
+	
 	if selected == 1:
 		$CanvasLayer/Up1.get_child(1).UpgradeSpawner()
 		get_tree().paused = false
@@ -149,6 +161,8 @@ func _on_ConfirmButton_pressed():
 		$CanvasLayer/Up3.get_child(1).UpgradeSpawner()
 		get_tree().paused = false
 		queue_free()
+	
+	
 	
 	pass 
 

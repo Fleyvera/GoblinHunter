@@ -4,13 +4,18 @@ var level = 0
 
 var xp = 0
 
+var xpTarget = 100.0
+
+var percentage = 10.0
+
+
 var inGame = false
 
 
 var upgradeSelector = preload("res://Prefabs/UpgradeSelector.tscn")
 
 
-
+var push = false
 
 
 func _ready():
@@ -34,6 +39,8 @@ func _process(delta):
 	playerNumPos()
 	
 	XpSystem()
+	
+	Push()
 	
 	pass
 
@@ -66,15 +73,21 @@ func _on_PickUpArea_area_entered(area):
 
 func XpSystem():
 	
+	$CanvasLayer/Layer/ProgressBar.max_value = xpTarget
 	$CanvasLayer/Layer/ProgressBar.value = xp
 	$CanvasLayer/Layer/Label.set_text("Level " + str(level))
 	
+	print(xpTarget)
 	
-	if xp >= 50:
+	if xp >= xpTarget:
 		
 		level += 1
 		xp = 0
+		var xpPrcnt
+		xpPrcnt = (xpTarget / 100) * percentage
+		xpTarget += xpPrcnt
 		UpgradeSelection()
+		
 	
 	pass
 
@@ -100,4 +113,23 @@ func isInGame():
 	pass
 
 
+func PushEnemy():
+	
+	push = true
+	
+	pass
+
+
+func Push():
+	
+	if push:
+		$PushBody/CollisionShape2D.disabled = false
+		$PushBody.scale += Vector2(0.3 , 0.3)
+		if $PushBody.scale >= Vector2(5 , 5):
+			$PushBody/CollisionShape2D.disabled = true
+			$PushBody.scale = Vector2(1 ,1)
+			push = false
+			
+	
+	pass
 

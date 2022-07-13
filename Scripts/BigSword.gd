@@ -6,32 +6,23 @@ var inGame = false
 
 var attacking = false
 
-var damage = 15
+var damage = 15.0
 
-var speed = 3
+var speed = 3.0
 
 
 func _ready():
-	
+	$Timer.start()
 	pass 
 
 
 
 func _process(delta):
 	
-	isInGame()
+	
 	attack()
 	pass
 
-
-func isInGame():
-	
-	if get_parent().get_parent().inGame == true and inGame == false:
-		inGame = true
-		$Timer.start()
-		pass
-	
-	pass
 
 
 func _on_Timer_timeout():

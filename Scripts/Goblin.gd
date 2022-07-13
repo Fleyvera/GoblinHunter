@@ -2,13 +2,14 @@ extends KinematicBody2D
 
 var dmgCD = false
 
+var isAlive = true
 
 #Enemy attributes
 export (int) var speed
 
 var life = 20
 
-var damage = 10
+var enemyDamage = 10
 
 #Follow Sistem
 onready var players = get_node("../Players")
@@ -31,6 +32,7 @@ func _process(delta):
 	Follow(delta)
 	ProcessLifeBar()
 	DamageCoolDown()
+	
 	pass
 
 
@@ -93,19 +95,21 @@ func Damage(damage):
 		life -= damage
 		$ShowDamage.ShowDamage(damage)
 		Death()
-		$DmgCDTimer.start()
+		if isAlive:
+			$DmgCDTimer.start()
 	
 	
 	pass
 
 func DamageCoolDown():
 	
-	if dmgCD:
-		$Area2D/CollisionShape2D.disabled = true
-		speed = 0
-	else:
-		$Area2D/CollisionShape2D.disabled = false
-		speed = 100
+	if isAlive:
+		if dmgCD:
+			$Area2D/CollisionShape2D.disabled = true
+			speed = 0
+		else:
+			$Area2D/CollisionShape2D.disabled = false
+			speed = 100
 	
 	pass 
 
@@ -123,16 +127,17 @@ func Death():
 	
 	if life <= 0:
 		
-		
+		isAlive = false
 		$DeathTimer.start() #ativa timer morte
 		$AnimatedSprite.play("Death")
 		speed = 0
-		$Area2D/CollisionShape2D.set_deferred("disabled",true)
 		$CollisionShape2D.set_deferred("disabled",true)
+		$Area2D/CollisionShape2D.set_deferred("disabled",true)
 		
 		pass
 	
 	pass
+
 
 
 func _on_DeathTimer_timeout():

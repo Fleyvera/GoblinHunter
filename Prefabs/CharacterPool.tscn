@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Scripts/Knight.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Characters/Knight-Sheet.png" type="Texture" id=2]
@@ -11,10 +11,6 @@
 
 [sub_resource type="CircleShape2D" id=11]
 radius = 4.2
-
-[sub_resource type="CapsuleShape2D" id=12]
-radius = 5.4
-height = 8.4
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
@@ -247,15 +243,15 @@ percent_visible = false
 
 [node name="Area2D" type="Area2D" parent="Knight"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Knight/Area2D"]
-shape = SubResource( 12 )
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Knight/Area2D"]
+polygon = PoolVector2Array( -1.8, -9.6, -5.2, -0.8, -3, 7.8, 3.8, 7.8, 5.8, -0.8, 3.4, -9.6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Knight"]
 visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 27 )
 animation = "Walk"
-frame = 3
+frame = 1
 playing = true
 
 [node name="DmgCDTimer" type="Timer" parent="Knight"]
@@ -312,15 +308,15 @@ percent_visible = false
 
 [node name="Area2D" type="Area2D" parent="Wizard"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wizard/Area2D"]
-shape = SubResource( 12 )
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Wizard/Area2D"]
+polygon = PoolVector2Array( -1.8, -9.6, -5.2, -0.8, -3, 7.8, 3.8, 7.8, 5.8, -0.8, 3.4, -9.6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Wizard"]
 visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 10 )
 animation = "Idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="DmgCDTimer" type="Timer" parent="Wizard"]

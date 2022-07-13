@@ -1,17 +1,15 @@
 extends Node2D
 
 
-var isFollowing = false
 
-var attacking = false
+var damage
 
-var damage = 10
-
-var speed = 300
-
+var speed
 
 
 func _ready():
+	
+	
 	pass 
 
 
@@ -26,15 +24,12 @@ func _process(delta):
 
 
 
-
-func _on_DamageArea2D_body_entered(body):
+func _on_DamageArea2D_area_entered(area):
 	
-	if body.is_in_group("Enemy"):
+	if area.is_in_group("Enemy"):
 		
+		area.get_parent().Damage(damage)
 		
-		body.Damage(damage)
 		queue_free()
-		pass
 	
-	
-	pass # Replace with function body.
+	pass 

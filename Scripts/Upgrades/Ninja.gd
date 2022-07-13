@@ -7,7 +7,7 @@ var percentage = 10
 
 
 #Atributos
-var damage = 10
+var damage = 10.0
 var speed = 0.01
 var area = 0.5
 
@@ -17,15 +17,23 @@ func LevelingUpgrade():
 	if leveling != level:
 		
 		#Damage
-		damage = damage / percentage * level + damage
+		var dmgPrcnt
+		dmgPrcnt = (damage / 100) * percentage
+		damage += dmgPrcnt
 		
 		
 		#Speed
-		speed = speed / percentage * level + speed
+		var spdPrcnt
+		spdPrcnt = (speed / 100) * percentage
+		speed += spdPrcnt
 		
 		
 		#Range
-		scale = Vector2(area / percentage * level + area, area / percentage * level + area)
+		var rngPrcnt
+		rngPrcnt = scale.x / 100 * percentage
+		scale += Vector2(rngPrcnt, rngPrcnt)
+		
+		
 		
 		leveling = level
 

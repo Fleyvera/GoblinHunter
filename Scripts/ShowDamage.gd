@@ -19,11 +19,11 @@ func _process(delta):
 
 func ShowDamage(valor):
 	
-	
+	var formatedValor =  "%.0f" % valor
 	
 	var newValor = nDamagePool.spawnDamage(0)
 	
-	newValor.get_child(0).set_text(str(valor))
+	newValor.get_child(0).set_text(str(formatedValor))
 	
 	add_child(newValor)
 	

@@ -6,8 +6,8 @@ var percentage = 10
 
 
 #Atributos
-var damage = 20
-var speed = 2
+var damage = 20.0
+var speed = 2.0
 var area = 0.5
 
 onready var player = get_parent().get_parent()
@@ -20,16 +20,23 @@ func LevelingUpgrade():
 	if leveling != level:
 		
 		#Damage
-		damage = damage / percentage * level + damage
+		var dmgPrcnt
+		dmgPrcnt = (damage / 100) * percentage
+		damage += dmgPrcnt
 		
 		
 		#Speed
+		var spdPrcnt
+		spdPrcnt = (speed / 100) * percentage
+		speed -= spdPrcnt
 		$Timer.wait_time = speed
-		speed = speed - (speed / percentage * level) 
 		
 		
 		#Range
-		scale = Vector2(area / percentage * level + area, area / percentage * level + area)
+		var rngPrcnt
+		rngPrcnt = scale.x / 100 * percentage
+		scale += Vector2(rngPrcnt, rngPrcnt)
+		
 		
 		leveling = level
 	
@@ -52,7 +59,6 @@ func _process(delta):
 	
 	LevelingUpgrade()
 	
-	print(damage)
 	
 	pass
 

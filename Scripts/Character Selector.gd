@@ -26,13 +26,13 @@ func _ready():
 	
 	get_tree().paused = true
 	
-	
+	set_process(true)
 	pass 
 
 
 func _process(delta):
 	
-	JoyStickSelect()
+	SelectByKeyboardOrJoystick()
 	
 	pass
 
@@ -84,6 +84,7 @@ func p1Instance():
 	realPlayer.inGame = true
 	realPlayer.global_position = $p1Pos.global_position
 	get_owner().get_node("Players").add_child(realPlayer)
+	
 	
 	pass
 
@@ -157,11 +158,23 @@ func _on_p2Right_pressed():
 	pass 
 
 
-func JoyStickSelect():
+func SelectByKeyboardOrJoystick():
 	#Selecionar pelo controle
-	if Input.is_action_just_pressed("ArrowLeft"):
+	if Input.is_action_just_pressed("p2Left"):
 		_on_p2Left_pressed()
-	elif Input.is_action_just_pressed("ArrowRight"):
+	elif Input.is_action_just_pressed("p2Right"):
 		_on_p2Right_pressed()
+	
+	#Selecionar pelo teclado
+	if Input.is_action_just_pressed("Left"):
+		_on_p1Left_pressed()
+	elif Input.is_action_just_pressed("Right"):
+		_on_p1Right_pressed()
+	
+	
+	#Confirmar por ambos
+	if Input.is_action_just_pressed("Confirm"):
+		print("hey")
+		_on_ReadyButton_pressed()
 	
 	pass

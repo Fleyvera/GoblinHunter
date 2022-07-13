@@ -7,9 +7,9 @@ var inGame = false
 
 
 
-var damage = 10
+var damage = 10.0
 
-var speed = 3
+var speed = 150.0
 
 
 
@@ -34,58 +34,46 @@ func ManaSystem(delta):
 	
 	$ProgressBar.max_value = 5
 	$ProgressBar.value = mana
+		
+	if attacking == false:
+		$DetectionArea2D/CollisionShape2D.disabled = true
+	else:
+		$DetectionArea2D/CollisionShape2D.disabled = false
 	
 	
+	$ProgressBar.show()
 	pass
-
-func _on_ManaTimer_timeout():
-	
-	
-	
-	pass
-
 
 func _ready():
+	
 	pass 
 
 
 
 func _process(delta):
 	
-	isInGame()
+	
 	ManaSystem(delta)
 	pass
 
 
-func isInGame():
+
+
+
+func _on_DetectionArea2D_area_entered(area):
 	
-	if get_parent().get_parent().inGame == true and inGame == false:
-		inGame = true
-		pass
 	
-	pass
-
-
-
-
-
-func _on_DetectionArea2D_body_entered(body):
 	
-	if body.is_in_group("Enemy"):
-		if attacking:
-			$Sprite.look_at(body.global_position)
-			
-			Shoot()
-			
-			$DetectionArea2D/CollisionShape2D.set_deferred("disabled" , true)
-			yield(get_tree().create_timer(0.3) , "timeout")
-			$DetectionArea2D/CollisionShape2D.set_deferred("disabled" , false)
+	if area.is_in_group("Enemy"):
 		
-		pass
-	
-	
+		$Sprite.look_at(area.global_position)
+		
+		Shoot()
+
 	
 	pass 
+
+
 
 func Shoot():
 	
@@ -97,10 +85,16 @@ func Shoot():
 	
 	bullet.rotation_degrees = $Sprite.rotation_degrees
 	
+	bullet.damage = damage
+	
+	bullet.speed = speed
+	
 	get_parent().get_parent().get_parent().call_deferred("add_child", bullet)
 	
 	mana -= 0.2
 	
+
+
 
 
 

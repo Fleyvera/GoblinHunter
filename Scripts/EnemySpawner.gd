@@ -55,14 +55,13 @@ func EnemySpawner():
 	get_owner().add_child(enemy)
 	
 	
-	print(time)
+	
 	pass
 
 
 
 func _on_EnemyTimer_timeout():
 	
-	randomize()
 	$EnemyTimer.wait_time = time
 	EnemySpawner()
 	
@@ -74,6 +73,7 @@ func _on_ScaleTimer_timeout():
 	
 	time -= 0.2
 	if time <= 0.2:
-		time = 1
+		time = 0.8
+		
 	
 	pass 

@@ -42,7 +42,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="DamageArea2D" type="Area2D" parent="MagicBall" groups=["Weapon"]]
+[node name="DamageArea2D" type="Area2D" parent="MagicBall"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MagicBall/DamageArea2D"]
 position = Vector2( -0.333333, 0.333333 )
@@ -51,7 +51,6 @@ shape = SubResource( 15 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="MagicBall"]
 frames = SubResource( 14 )
 animation = "Idle"
-frame = 3
 playing = true
 
-[connection signal="body_entered" from="MagicBall/DamageArea2D" to="MagicBall" method="_on_DamageArea2D_body_entered"]
+[connection signal="area_entered" from="MagicBall/DamageArea2D" to="MagicBall" method="_on_DamageArea2D_area_entered"]
