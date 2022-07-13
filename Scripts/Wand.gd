@@ -5,11 +5,11 @@ var bulletsPool = preload("res://Prefabs/BulletsPool.tscn")
 var inGame = false
 
 
-
+var shotSpeed = 150
 
 var damage = 10.0
 
-var speed = 150.0
+var speed = 0.04
 
 
 
@@ -29,7 +29,7 @@ func ManaSystem(delta):
 		attacking = true
 	
 	if attacking == false:
-		mana += delta
+		mana += speed
 	
 	
 	$ProgressBar.max_value = 5
@@ -87,11 +87,11 @@ func Shoot():
 	
 	bullet.damage = damage
 	
-	bullet.speed = speed
+	bullet.speed = shotSpeed
 	
 	get_parent().get_parent().get_parent().call_deferred("add_child", bullet)
 	
-	mana -= 0.2
+	mana -= 0.5
 	
 
 

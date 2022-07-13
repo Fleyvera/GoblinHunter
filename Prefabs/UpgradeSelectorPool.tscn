@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/UpgradeSelectorPool.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/alagard.ttf" type="DynamicFontData" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Sprites/Upgrades/Damage.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Upgrades/LifePotion.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Upgrades/Feather.png" type="Texture" id=8]
+[ext_resource path="res://icon.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=11]
 outline_size = 2
@@ -201,4 +202,43 @@ margin_bottom = 20.0
 [node name="Icon" type="Sprite" parent="HarpyFeatherSelector/Panel"]
 position = Vector2( 20, 20 )
 texture = ExtResource( 8 )
+region_rect = Rect2( 133.549, 0.854416, 21.0759, 31.3211 )
+
+[node name="ElectricRingSelector" type="Node2D" parent="."]
+scale = Vector2( 3, 3 )
+script = ExtResource( 4 )
+upgrade_name = "Eletric Ring"
+upgrade_num = 5
+
+[node name="Description" type="Label" parent="ElectricRingSelector"]
+margin_left = -52.0
+margin_top = 22.0
+margin_right = 158.0
+margin_bottom = 37.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 11 )
+text = "Increase your attack speed"
+align = 1
+
+[node name="Title" type="Label" parent="ElectricRingSelector"]
+margin_left = -23.6667
+margin_top = -29.0
+margin_right = 71.3333
+margin_bottom = -14.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 11 )
+text = "Eletric Ring"
+align = 1
+
+[node name="Panel" type="Panel" parent="ElectricRingSelector"]
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="Icon" type="Sprite" parent="ElectricRingSelector/Panel"]
+modulate = Color( 1, 0.968627, 0, 1 )
+position = Vector2( 20, 20 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
 region_rect = Rect2( 133.549, 0.854416, 21.0759, 31.3211 )

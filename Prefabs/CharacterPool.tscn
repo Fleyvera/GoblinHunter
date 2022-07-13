@@ -316,7 +316,7 @@ visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 10 )
 animation = "Idle"
-frame = 1
+frame = 3
 playing = true
 
 [node name="DmgCDTimer" type="Timer" parent="Wizard"]

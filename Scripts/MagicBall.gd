@@ -33,3 +33,11 @@ func _on_DamageArea2D_area_entered(area):
 		queue_free()
 	
 	pass 
+
+
+func _on_DeleteTimer_timeout():
+	
+	
+	queue_free()
+	
+	pass 

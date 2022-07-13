@@ -72,7 +72,7 @@ func _on_ScaleTimer_timeout():
 	
 	
 	time -= 0.2
-	if time <= 0.2:
+	if time <= 0.1:
 		time = 0.8
 		
 	

@@ -16,9 +16,23 @@ func _ready():
 	pass 
 
 
+func LimitSystem():
+	
+	$Timer.wait_time = speed
+	
+	if speed <= 0.7:
+		speed = 0.7
+	
+	print(speed)
+	
+	pass
+
 
 func _process(delta):
 	
+	
+	
+	LimitSystem()
 	
 	attack()
 	pass

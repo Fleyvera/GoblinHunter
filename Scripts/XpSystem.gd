@@ -4,9 +4,9 @@ var level = 0
 
 var xp = 0
 
-var xpTarget = 100.0
+var xpTarget = 5.0
 
-var percentage = 10.0
+var percentage = 0.0
 
 
 var inGame = false
@@ -77,7 +77,7 @@ func XpSystem():
 	$CanvasLayer/Layer/ProgressBar.value = xp
 	$CanvasLayer/Layer/Label.set_text("Level " + str(level))
 	
-	print(xpTarget)
+	
 	
 	if xp >= xpTarget:
 		

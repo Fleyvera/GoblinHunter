@@ -2,7 +2,7 @@ extends Node2D
 
 var upSelectorPool = preload("res://Prefabs/UpgradeSelectorPool.tscn")
 
-var upSelecQuantity = 4  #5 upgrades ja que o array conta o 0
+var upSelecQuantity = 5  #6 upgrades ja que o array conta o 0
 
 var selected = 1
 
@@ -117,8 +117,16 @@ func UpgradeSelectorSpawner():
 	
 	var Up2 = upgradesSelector_num
 	
-#	if Up2 == Up1:
-#		Up2+=1
+	#Garante que os upgrades n sejam iguais
+	if Up2 == Up1:
+		#se cair um numero repetido menor q o maximo sortei pra cima um numero entre 0 e o maximo menos oq caiu
+		if Up1 < upSelecQuantity:
+			Up2+= rng.randi_range(0 , upSelecQuantity - Up1)
+		elif Up1 == upSelecQuantity:
+			Up2 -= rng.randi_range(0 , upSelecQuantity - 1)
+	
+	print(Up1)
+	print(Up2)
 	
 	
 	upgradeSelector = nUpSelectorPool.spawnUpgradeSelector(Up2)
@@ -130,10 +138,28 @@ func UpgradeSelectorSpawner():
 	
 	var Up3 = upgradesSelector_num
 	
-#	if Up3 == Up1 or Up3 == Up1:
-#		Up3+=1
-#	if Up3 == Up1 or Up3 == Up1:
-#		Up3+=1
+	#dois ifs para garantir que os upgrades n se repitao, mesma logica de cima
+	if Up3 == Up1 or Up3 == Up2:
+		if Up3 == Up1 and Up1 < upSelecQuantity:
+			Up3+=1
+		if Up3 == Up1 and Up1 == upSelecQuantity:
+			Up3-=1
+			
+		if Up3 == Up2 and Up2 < upSelecQuantity:
+			Up3+=1
+		if Up3 == Up2 and Up2 == upSelecQuantity:
+			Up3-=1
+	
+	if Up3 == Up1 or Up3 == Up2:
+		if Up3 == Up1 and Up1 < upSelecQuantity:
+			Up3+=1
+		if Up3 == Up1 and Up1 == upSelecQuantity:
+			Up3-=1
+			
+		if Up3 == Up2 and Up2 < upSelecQuantity:
+			Up3+=1
+		if Up3 == Up2 and Up2 == upSelecQuantity:
+			Up3-=1
 	
 	upgradeSelector = nUpSelectorPool.spawnUpgradeSelector(Up3)
 	
