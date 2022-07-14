@@ -241,7 +241,7 @@ margin_right = 23.6667
 margin_bottom = 37.3333
 percent_visible = false
 
-[node name="Area2D" type="Area2D" parent="Knight"]
+[node name="Area2D" type="Area2D" parent="Knight" groups=["Player"]]
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Knight/Area2D"]
 polygon = PoolVector2Array( -1.8, -9.6, -5.2, -0.8, -3, 7.8, 3.8, 7.8, 5.8, -0.8, 3.4, -9.6 )
@@ -251,7 +251,7 @@ visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 27 )
 animation = "Walk"
-frame = 1
+frame = 2
 playing = true
 
 [node name="DmgCDTimer" type="Timer" parent="Knight"]
@@ -306,7 +306,7 @@ margin_right = 23.6667
 margin_bottom = 37.3333
 percent_visible = false
 
-[node name="Area2D" type="Area2D" parent="Wizard"]
+[node name="Area2D" type="Area2D" parent="Wizard" groups=["Player"]]
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Wizard/Area2D"]
 polygon = PoolVector2Array( -1.8, -9.6, -5.2, -0.8, -3, 7.8, 3.8, 7.8, 5.8, -0.8, 3.4, -9.6 )

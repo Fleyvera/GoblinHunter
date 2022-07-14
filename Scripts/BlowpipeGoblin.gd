@@ -4,8 +4,10 @@ var dmgCD = false
 
 var isAlive = true
 
+var shooting = false
+
 #Enemy attributes
-export (int) var speed = 190
+export (int) var speed
 
 var life = 20
 
@@ -14,14 +16,7 @@ var enemyDamage = 10
 #Follow Sistem
 onready var players = get_node("../Players")
 
-
-
-func setPhysic():
-	
-	
-	
-	pass
-
+var playerPos
 
 
 func _ready():
@@ -36,7 +31,7 @@ func _ready():
 
 func _process(delta):
 	
-	Follow(delta)
+	FollowAndShoot(delta)
 	ProcessLifeBar()
 	DamageCoolDown()
 	
@@ -44,9 +39,10 @@ func _process(delta):
 
 
 
+
 func Follow(delta):
 	
-	var playerPos
+	
 	var distance1 = 0
 	var distance2 = 0
 	
@@ -84,9 +80,9 @@ func Follow(delta):
 		
 	var dir = (playerPos - position).normalized()
 	
-	var move = dir.normalized() * speed
+	var move = dir.normalized() * speed * delta
 	
-	move_and_slide(move)
+	move_and_collide(move)
 	
 	
 	
@@ -115,7 +111,7 @@ func DamageCoolDown():
 			speed = 0
 		else:
 			$Area2D/CollisionShape2D.disabled = false
-			speed = 190
+			speed = 100
 	
 	pass 
 
@@ -168,5 +164,41 @@ func ProcessLifeBar():
 	
 	pass
 
+
+
+
+func _on_DetectionArea_area_entered(area):
+	
+	if area.is_in_group("Player"):
+		shooting = true
+	
+	
+	pass 
+
+
+func _on_DetectionArea_area_exited(area):
+	
+	if area.is_in_group("Player"):
+		shooting = false
+	
+	pass 
+
+
+func FollowAndShoot(delta):
+	
+	if shooting == false and isAlive:
+		Follow(delta)
+		$AnimatedSprite.play("Walk")
+	else:
+		look_at(playerPos)
+		$AnimatedSprite.play("Shooting")
+	
+	
+	pass
+
+func Shoot():
+	
+	
+	pass
 
 

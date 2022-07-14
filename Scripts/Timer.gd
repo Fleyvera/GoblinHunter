@@ -12,6 +12,7 @@ func _ready():
 func _process(delta):
 	
 	TimerSystem()
+	$Label.show()
 	
 	pass
 

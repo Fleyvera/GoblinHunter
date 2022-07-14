@@ -51,7 +51,7 @@ shape = SubResource( 15 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="MagicBall"]
 frames = SubResource( 14 )
 animation = "Idle"
-frame = 1
+frame = 2
 playing = true
 
 [node name="DeleteTimer" type="Timer" parent="MagicBall"]

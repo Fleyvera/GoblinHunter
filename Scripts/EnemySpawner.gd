@@ -4,9 +4,10 @@ extends Node2D
 var enemyPool= preload("res://Prefabs/EnemyPool.tscn")
 
 
-var enemy_num = 0
+export var enemy_num = 0
 
-var time = 1
+var time = 0.4
+
 
 func _ready():
 	
@@ -71,9 +72,9 @@ func _on_EnemyTimer_timeout():
 func _on_ScaleTimer_timeout():
 	
 	
-	time -= 0.2
-	if time <= 0.1:
-		time = 0.8
+	time -= 0.1
+	if time <= 0:
+		time = 0.4
 		
 	
 	pass 

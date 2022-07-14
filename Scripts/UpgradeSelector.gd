@@ -118,15 +118,9 @@ func UpgradeSelectorSpawner():
 	var Up2 = upgradesSelector_num
 	
 	#Garante que os upgrades n sejam iguais
-	if Up2 == Up1:
-		#se cair um numero repetido menor q o maximo sortei pra cima um numero entre 0 e o maximo menos oq caiu
-		if Up1 < upSelecQuantity:
-			Up2+= rng.randi_range(0 , upSelecQuantity - Up1)
-		elif Up1 == upSelecQuantity:
-			Up2 -= rng.randi_range(0 , upSelecQuantity - 1)
-	
-	print(Up1)
-	print(Up2)
+	while Up2 == Up1:
+		upgradesSelector_num = rng.randi_range(0 , upSelecQuantity)
+		Up2 = upgradesSelector_num
 	
 	
 	upgradeSelector = nUpSelectorPool.spawnUpgradeSelector(Up2)
@@ -138,28 +132,9 @@ func UpgradeSelectorSpawner():
 	
 	var Up3 = upgradesSelector_num
 	
-	#dois ifs para garantir que os upgrades n se repitao, mesma logica de cima
-	if Up3 == Up1 or Up3 == Up2:
-		if Up3 == Up1 and Up1 < upSelecQuantity:
-			Up3+=1
-		if Up3 == Up1 and Up1 == upSelecQuantity:
-			Up3-=1
-			
-		if Up3 == Up2 and Up2 < upSelecQuantity:
-			Up3+=1
-		if Up3 == Up2 and Up2 == upSelecQuantity:
-			Up3-=1
-	
-	if Up3 == Up1 or Up3 == Up2:
-		if Up3 == Up1 and Up1 < upSelecQuantity:
-			Up3+=1
-		if Up3 == Up1 and Up1 == upSelecQuantity:
-			Up3-=1
-			
-		if Up3 == Up2 and Up2 < upSelecQuantity:
-			Up3+=1
-		if Up3 == Up2 and Up2 == upSelecQuantity:
-			Up3-=1
+	while Up3 == Up1 or Up3 == Up2:
+		upgradesSelector_num = rng.randi_range(0 , upSelecQuantity)
+		Up3 = upgradesSelector_num
 	
 	upgradeSelector = nUpSelectorPool.spawnUpgradeSelector(Up3)
 	

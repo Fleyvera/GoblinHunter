@@ -23,7 +23,7 @@ func LimitSystem():
 	if speed <= 0.7:
 		speed = 0.7
 	
-	print(speed)
+	
 	
 	pass
 
