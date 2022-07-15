@@ -6,17 +6,23 @@ var isAlive = true
 
 var shooting = false
 
+var playerPos
+
 #Enemy attributes
-export (int) var speed
+export (int) var speed = 190
+
+var trueSpeed = speed
 
 var life = 20
 
 var enemyDamage = 10
 
+var shotSpeed = 50
+
 #Follow Sistem
 onready var players = get_node("../Players")
 
-var playerPos
+const bulletsPool = preload("res://Prefabs/BulletsPool.tscn")
 
 
 func _ready():
@@ -26,17 +32,20 @@ func _ready():
 	pass 
 
 
-
+func _physics_process(delta):
+	
+	if isAlive:
+		FollowAndShoot(delta)
+	pass
 
 
 func _process(delta):
 	
-	FollowAndShoot(delta)
+	
 	ProcessLifeBar()
 	DamageCoolDown()
 	
 	pass
-
 
 
 
@@ -80,9 +89,9 @@ func Follow(delta):
 		
 	var dir = (playerPos - position).normalized()
 	
-	var move = dir.normalized() * speed * delta
+	var move = dir.normalized() * trueSpeed
 	
-	move_and_collide(move)
+	move_and_slide(move)
 	
 	
 	
@@ -108,10 +117,10 @@ func DamageCoolDown():
 	if isAlive:
 		if dmgCD:
 			$Area2D/CollisionShape2D.disabled = true
-			speed = 0
+			trueSpeed = 0
 		else:
 			$Area2D/CollisionShape2D.disabled = false
-			speed = 100
+			trueSpeed = speed
 	
 	pass 
 
@@ -166,7 +175,6 @@ func ProcessLifeBar():
 
 
 
-
 func _on_DetectionArea_area_entered(area):
 	
 	if area.is_in_group("Player"):
@@ -192,11 +200,29 @@ func FollowAndShoot(delta):
 	else:
 		look_at(playerPos)
 		$AnimatedSprite.play("Shooting")
-	
-	
+		Shoot()
+		shooting = false
+		$DetectionArea/CollisionShape2D.set_deferred("disabled",true)
+		yield(get_tree().create_timer(0.1) , "timeout")
+		$DetectionArea/CollisionShape2D.set_deferred("disabled",false)
+		
 	pass
 
 func Shoot():
+	
+	var nBulletsPool = bulletsPool.instance()
+	
+	var bullet = nBulletsPool.spawnBullet(1)
+	
+	bullet.global_position = global_position
+	
+	bullet.rotation_degrees = rotation_degrees
+	
+	bullet.enemyDamage = enemyDamage
+	
+	bullet.speed = shotSpeed
+	
+	get_parent().get_parent().call_deferred("add_child", bullet)
 	
 	
 	pass

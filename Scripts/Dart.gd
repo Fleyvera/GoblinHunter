@@ -1,8 +1,7 @@
 extends Node2D
 
 
-
-var damage
+var enemyDamage
 
 var speed
 
@@ -22,17 +21,6 @@ func _physics_process(delta):
 	pass
 
 
-
-
-func _on_DamageArea2D_area_entered(area):
-	
-	if area.is_in_group("Enemy"):
-		
-		area.get_parent().Damage(damage)
-		
-		queue_free()
-	
-	pass 
 
 
 func _on_DeleteTimer_timeout():

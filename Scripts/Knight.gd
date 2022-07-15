@@ -26,11 +26,17 @@ func _ready():
 	
 	pass
 
-
-func _process(delta):
+func _physics_process(delta):
 	
 	if inGame:
 		Move(delta)
+	
+	
+	pass
+
+
+func _process(delta):
+	
 	
 	Anim()
 	
@@ -77,7 +83,7 @@ func Move(delta):
 		if Input.is_action_pressed("p2Down"):
 			dir += Vector2(0 , 1)
 	
-	move_and_collide(dir.normalized() * speed * delta)
+	move_and_slide(dir.normalized() * speed)
 	
 	pass
 

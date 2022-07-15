@@ -7,6 +7,8 @@ var isAlive = true
 #Enemy attributes
 export (int) var speed = 190
 
+var trueSpeed = speed
+
 var life = 20
 
 var enemyDamage = 10
@@ -31,12 +33,16 @@ func _ready():
 	pass 
 
 
-
+func _physics_process(delta):
+	
+	if isAlive:
+		Follow(delta)
+	pass
 
 
 func _process(delta):
 	
-	Follow(delta)
+	
 	ProcessLifeBar()
 	DamageCoolDown()
 	
@@ -84,7 +90,7 @@ func Follow(delta):
 		
 	var dir = (playerPos - position).normalized()
 	
-	var move = dir.normalized() * speed
+	var move = dir.normalized() * trueSpeed
 	
 	move_and_slide(move)
 	
@@ -112,10 +118,10 @@ func DamageCoolDown():
 	if isAlive:
 		if dmgCD:
 			$Area2D/CollisionShape2D.disabled = true
-			speed = 0
+			trueSpeed = 0
 		else:
 			$Area2D/CollisionShape2D.disabled = false
-			speed = 190
+			trueSpeed = speed
 	
 	pass 
 

@@ -33,11 +33,11 @@ func UpgradeSpawner():
 	if upgrade == null:
 		var nUpPool = upPool.instance()
 		
-		var upgrade = nUpPool.spawnUpgrade(upgrade_num)
+		var nUpgrade = nUpPool.spawnUpgrade(upgrade_num)
 		
 #	weapon.scale = Vector2(10 ,10)
 		
-		get_parent().get_parent().get_parent().get_parent().get_node("Upgrades").add_child(upgrade)
+		get_parent().get_parent().get_parent().get_parent().get_node("Upgrades").add_child(nUpgrade)
 	else:
 		
 		upgrade.level += 1
