@@ -8,6 +8,10 @@ var shooting = false
 
 var playerPos
 
+var time = 0
+
+var setTime = 1
+
 #Enemy attributes
 export (int) var speed = 190
 
@@ -41,7 +45,7 @@ func _physics_process(delta):
 
 func _process(delta):
 	
-	
+	TimerBullet(delta)
 	ProcessLifeBar()
 	DamageCoolDown()
 	
@@ -201,30 +205,41 @@ func FollowAndShoot(delta):
 		look_at(playerPos)
 		$AnimatedSprite.play("Shooting")
 		Shoot()
-		shooting = false
-		$DetectionArea/CollisionShape2D.set_deferred("disabled",true)
-		yield(get_tree().create_timer(0.1) , "timeout")
-		$DetectionArea/CollisionShape2D.set_deferred("disabled",false)
+#		shooting = false
+#		$DetectionArea/CollisionShape2D.set_deferred("disabled",true)
+#		yield(get_tree().create_timer(0.1) , "timeout")
+#		$DetectionArea/CollisionShape2D.set_deferred("disabled",false)
 		
 	pass
 
 func Shoot():
 	
-	var nBulletsPool = bulletsPool.instance()
-	
-	var bullet = nBulletsPool.spawnBullet(1)
-	
-	bullet.global_position = global_position
-	
-	bullet.rotation_degrees = rotation_degrees
-	
-	bullet.enemyDamage = enemyDamage
-	
-	bullet.speed = shotSpeed
-	
-	get_parent().get_parent().call_deferred("add_child", bullet)
+	if time == setTime:
+		
+		time = 0
+		
+		var nBulletsPool = bulletsPool.instance()
+		
+		var bullet = nBulletsPool.spawnBullet(1)
+		
+		bullet.global_position = global_position
+		
+		bullet.rotation_degrees = rotation_degrees
+		
+		bullet.enemyDamage = enemyDamage
+		
+		bullet.speed = shotSpeed
+		
+		get_parent().get_parent().call_deferred("add_child", bullet)
 	
 	
 	pass
 
-
+func TimerBullet(delta):
+	
+	time += delta
+	if time >= setTime:
+		time == setTime
+	
+	print (time)
+	

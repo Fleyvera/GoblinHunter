@@ -65,7 +65,7 @@ shape = SubResource( 15 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="MagicBall"]
 frames = SubResource( 14 )
 animation = "Idle"
-frame = 2
+frame = 3
 playing = true
 
 [node name="DeleteTimer" type="Timer" parent="MagicBall"]
@@ -76,7 +76,7 @@ autostart = true
 scale = Vector2( 0.4, 0.4 )
 script = ExtResource( 4 )
 
-[node name="DamageArea2D" type="Area2D" parent="Dart" groups=["Enemy"]]
+[node name="DamageArea2D" type="Area2D" parent="Dart" groups=["enemyShoot"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dart/DamageArea2D"]
 position = Vector2( 6.35783e-07, -6.35783e-07 )
