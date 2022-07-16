@@ -129,7 +129,7 @@ func LifeSystem():
 #Teste para tomar dano
 func _on_Area2D_area_entered(area):
 	
-	if area.is_in_group("Enemy") and dmgCD == false:
+	if area.is_in_group("Enemy") and dmgCD == false or area.is_in_group("enemyShoot") and dmgCD == false:
 		life -= area.get_parent().enemyDamage
 		#Ativa cool down de dano
 		dmgCD = true

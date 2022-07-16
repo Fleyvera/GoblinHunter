@@ -4,9 +4,9 @@ var level = 0
 
 var xp = 0
 
-var xpTarget = 5.0
+var xpTarget = 30.0
 
-var percentage = 0.0
+var percentage = 10.0
 
 
 var inGame = false

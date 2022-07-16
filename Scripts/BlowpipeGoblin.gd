@@ -6,11 +6,13 @@ var isAlive = true
 
 var shooting = false
 
+var shootDelay = false
+
 var playerPos
 
-var time = 0
+var time = 0.0
 
-var setTime = 1
+var setTime = 1.0
 
 #Enemy attributes
 export (int) var speed = 190
@@ -21,7 +23,7 @@ var life = 20
 
 var enemyDamage = 10
 
-var shotSpeed = 50
+var shotSpeed = 200
 
 #Follow Sistem
 onready var players = get_node("../Players")
@@ -45,10 +47,9 @@ func _physics_process(delta):
 
 func _process(delta):
 	
-	TimerBullet(delta)
 	ProcessLifeBar()
 	DamageCoolDown()
-	
+	print(shooting)
 	pass
 
 
@@ -198,48 +199,44 @@ func _on_DetectionArea_area_exited(area):
 
 func FollowAndShoot(delta):
 	
+	
+	
 	if shooting == false and isAlive:
 		Follow(delta)
 		$AnimatedSprite.play("Walk")
-	else:
-		look_at(playerPos)
+		$ShootTimer.stop()
+		shootDelay = false
+	elif shooting == true:
+		$mira.look_at(playerPos)
 		$AnimatedSprite.play("Shooting")
-		Shoot()
-#		shooting = false
-#		$DetectionArea/CollisionShape2D.set_deferred("disabled",true)
-#		yield(get_tree().create_timer(0.1) , "timeout")
-#		$DetectionArea/CollisionShape2D.set_deferred("disabled",false)
-		
+		if shootDelay == false:
+			Shoot()
+			$ShootTimer.start()
+			shootDelay = true
 	pass
 
 func Shoot():
 	
-	if time == setTime:
-		
-		time = 0
-		
-		var nBulletsPool = bulletsPool.instance()
-		
-		var bullet = nBulletsPool.spawnBullet(1)
-		
-		bullet.global_position = global_position
-		
-		bullet.rotation_degrees = rotation_degrees
-		
-		bullet.enemyDamage = enemyDamage
-		
-		bullet.speed = shotSpeed
-		
-		get_parent().get_parent().call_deferred("add_child", bullet)
+	var nBulletsPool = bulletsPool.instance()
+	
+	var bullet = nBulletsPool.spawnBullet(1)
+	
+	bullet.global_position = global_position
+	
+	bullet.rotation_degrees = $mira.rotation_degrees
+	
+	bullet.enemyDamage = enemyDamage
+	
+	bullet.speed = shotSpeed
+	
+	get_parent().get_parent().call_deferred("add_child", bullet)
 	
 	
 	pass
 
-func TimerBullet(delta):
+
+func _on_ShootTimer_timeout():
 	
-	time += delta
-	if time >= setTime:
-		time == setTime
+	shootDelay = false
 	
-	print (time)
-	
+	pass 

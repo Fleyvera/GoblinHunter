@@ -6,8 +6,9 @@ var enemyPool= preload("res://Prefabs/EnemyPool.tscn")
 
 export var enemy_num = 0
 
-var time = 0.4
+var time = 0.8
 
+var scaleTime = 14
 
 func _ready():
 	
@@ -64,6 +65,7 @@ func EnemySpawner():
 func _on_EnemyTimer_timeout():
 	
 	$EnemyTimer.wait_time = time
+	$ScaleTimer.wait_time = scaleTime
 	EnemySpawner()
 	
 	pass 
@@ -73,8 +75,13 @@ func _on_ScaleTimer_timeout():
 	
 	
 	time -= 0.1
-	if time <= 0:
+	scaleTime -= 2
+	
+	if scaleTime <= 2:
+		scaleTime = 10
+	
+	
+	if time <= 0.1:
 		time = 0.4
-		
 	
 	pass 
