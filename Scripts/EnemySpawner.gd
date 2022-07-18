@@ -6,6 +6,9 @@ var enemyPool= preload("res://Prefabs/EnemyPool.tscn")
 
 export var enemy_num = 0
 
+var enemyCountExplo = 0
+var enemyCountRanged = 0
+
 var time = 0.8
 
 var scaleTime = 14
@@ -19,11 +22,12 @@ func _ready():
 func _process(delta):
 	
 	$Positions.global_position = get_parent().get_node("CameraController").global_position
+	SpawnSpecials()
 	
 	
 	pass
 
-func EnemySpawner():
+func EnemySpawner(enemy_num):
 	
 	randomize()
 	
@@ -57,7 +61,6 @@ func EnemySpawner():
 	get_owner().add_child(enemy)
 	
 	
-	
 	pass
 
 
@@ -66,7 +69,9 @@ func _on_EnemyTimer_timeout():
 	
 	$EnemyTimer.wait_time = time
 	$ScaleTimer.wait_time = scaleTime
-	EnemySpawner()
+	EnemySpawner(0)
+	enemyCountExplo += 1
+	enemyCountRanged += 1
 	
 	pass 
 
@@ -78,10 +83,23 @@ func _on_ScaleTimer_timeout():
 	scaleTime -= 2
 	
 	if scaleTime <= 2:
-		scaleTime = 10
+		scaleTime = 14
 	
 	
-	if time <= 0.1:
-		time = 0.4
+	if time <= 0.4:
+		time = 0.8
 	
 	pass 
+
+
+func SpawnSpecials():
+	
+	if enemyCountExplo >= 15:
+		EnemySpawner(2)
+		enemyCountExplo = 0
+	if enemyCountRanged >= 30:
+		EnemySpawner(1)
+		enemyCountRanged = 0
+	
+	pass
+

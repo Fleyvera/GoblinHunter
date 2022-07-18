@@ -4,16 +4,6 @@ var dmgCD = false
 
 var isAlive = true
 
-var shooting = false
-
-var shootDelay = false
-
-var playerPos
-
-var time = 0.0
-
-var setTime = 1.0
-
 #Enemy attributes
 export (int) var speed = 190
 
@@ -23,12 +13,19 @@ var life = 20
 
 var enemyDamage = 10
 
-var shotSpeed = 200
+var explosionDamage = 20
 
 #Follow Sistem
 onready var players = get_node("../Players")
 
-const bulletsPool = preload("res://Prefabs/BulletsPool.tscn")
+
+
+func setPhysic():
+	
+	
+	
+	pass
+
 
 
 func _ready():
@@ -41,22 +38,23 @@ func _ready():
 func _physics_process(delta):
 	
 	if isAlive:
-		FollowAndShoot(delta)
+		Follow(delta)
 	pass
 
 
 func _process(delta):
 	
+	
 	ProcessLifeBar()
 	DamageCoolDown()
-	print(shooting)
+	
 	pass
 
 
 
 func Follow(delta):
 	
-	
+	var playerPos
 	var distance1 = 0
 	var distance2 = 0
 	
@@ -91,14 +89,12 @@ func Follow(delta):
 			else:
 				get_node("AnimatedSprite").flip_h = true
 		
-	
+		
 	var dir = (playerPos - position).normalized()
 	
 	var move = dir.normalized() * trueSpeed
 	
-	
-	if shooting == false:
-		move_and_slide(move)
+	move_and_slide(move)
 	
 	
 	
@@ -151,6 +147,10 @@ func Death():
 		speed = 0
 		$CollisionShape2D.set_deferred("disabled",true)
 		$Area2D/CollisionShape2D.set_deferred("disabled",true)
+		yield(get_tree().create_timer(0.4) , "timeout")
+		$AnimatedSprite.scale = Vector2(3,3)
+		$AnimatedSprite.position.y = -24
+		$ExplosionArea/CollisionShape2D.set_deferred("disabled",false)
 		
 		pass
 	
@@ -182,62 +182,19 @@ func ProcessLifeBar():
 
 
 
+func _on_ExplosionArea_area_entered(area):
+	
+	if area.is_in_group("Enemy"):
+		area.get_parent().Damage(20)
+	
+	pass
+
+
 func _on_DetectionArea_area_entered(area):
 	
-	if area.is_in_group("Player"):
-		shooting = true
-	
-	
-	pass 
-
-
-func _on_DetectionArea_area_exited(area):
 	
 	if area.is_in_group("Player"):
-		shooting = false
-	
-	pass 
-
-
-func FollowAndShoot(delta):
-	
-	Follow(delta)
-	
-	if shooting == false:
-		$AnimatedSprite.play("Walk")
-		$ShootTimer.stop()
-		shootDelay = false
-	elif shooting == true:
-		$mira.look_at(playerPos)
-		$AnimatedSprite.play("Shooting")
-		if shootDelay == false:
-			$ShootTimer.start()
-			shootDelay = true
-	pass
-
-func Shoot():
-	
-	var nBulletsPool = bulletsPool.instance()
-	
-	var bullet = nBulletsPool.spawnBullet(1)
-	
-	bullet.global_position = global_position
-	
-	bullet.rotation_degrees = $mira.rotation_degrees
-	
-	bullet.enemyDamage = enemyDamage
-	
-	bullet.speed = shotSpeed
-	
-	get_parent().get_parent().call_deferred("add_child", bullet)
-	
-	
-	pass
-
-
-func _on_ShootTimer_timeout():
-	
-	Shoot()
-	shootDelay = false
+		life = 0
+		Death()
 	
 	pass 

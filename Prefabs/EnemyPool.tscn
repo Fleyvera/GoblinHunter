@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Sprites/Goblin-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Goblin.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Scripts/XpDropper.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/BlowpipeGoblin.gd" type="Script" id=6]
 [ext_resource path="res://Sprites/RangedGoblin-Sheet.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/ExplosionGolbin.gd" type="Script" id=8]
+[ext_resource path="res://Sprites/ExplosionGoblin-Sheet.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=21]
 radius = 3.56758
@@ -168,11 +170,70 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=20]
 radius = 153.201
 
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 9 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 9 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 9 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 9 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 9 )
+region = Rect2( 160, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 9 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 9 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 9 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=49]
+animations = [ {
+"frames": [ SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
+"loop": true,
+"name": "Death",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 8.0
+} ]
+
+[sub_resource type="CircleShape2D" id=50]
+radius = 35.2
+
+[sub_resource type="CircleShape2D" id=51]
+radius = 35.2568
+
 [node name="EnemyPool" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="Goblin" type="KinematicBody2D" parent="." groups=["Enemy"]]
-scale = Vector2( 2, 2 )
+scale = Vector2( 2.5, 2.5 )
 collision_layer = 7
 collision_mask = 7
 collision/safe_margin = 1.0
@@ -195,7 +256,7 @@ shape = SubResource( 16 )
 position = Vector2( 0, -11 )
 frames = SubResource( 15 )
 animation = "Walk"
-frame = 2
+frame = 1
 playing = true
 
 [node name="DeathTimer" type="Timer" parent="Goblin"]
@@ -280,6 +341,70 @@ position = Vector2( 0, -4.4 )
 
 [node name="ShootTimer" type="Timer" parent="BlowpipeGoblin"]
 wait_time = 2.0
+one_shot = true
+
+[node name="ExplosionGoblin" type="KinematicBody2D" parent="." groups=["Enemy"]]
+scale = Vector2( 2.5, 2.5 )
+collision_layer = 7
+collision_mask = 7
+collision/safe_margin = 1.0
+script = ExtResource( 8 )
+speed = 200
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionGoblin"]
+position = Vector2( 0, -3 )
+scale = Vector2( 1.26136, 1.26136 )
+shape = SubResource( 21 )
+
+[node name="Area2D" type="Area2D" parent="ExplosionGoblin" groups=["Enemy"]]
+scale = Vector2( 0.333333, 0.333333 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionGoblin/Area2D"]
+position = Vector2( 7.15257e-07, -9.00002 )
+shape = SubResource( 16 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ExplosionGoblin"]
+position = Vector2( 0, -11 )
+frames = SubResource( 49 )
+animation = "Walk"
+frame = 1
+playing = true
+
+[node name="DeathTimer" type="Timer" parent="ExplosionGoblin"]
+wait_time = 0.6
+
+[node name="DmgCDTimer" type="Timer" parent="ExplosionGoblin"]
+wait_time = 0.5
+
+[node name="ShowDamage" type="Node2D" parent="ExplosionGoblin"]
+script = ExtResource( 4 )
+
+[node name="XpDropper" type="Node2D" parent="ExplosionGoblin"]
+script = ExtResource( 5 )
+
+[node name="LifeBar" type="Node2D" parent="ExplosionGoblin"]
+scale = Vector2( 0.3, 0.3 )
+z_index = -1
+
+[node name="LifeProgress" type="ProgressBar" parent="ExplosionGoblin/LifeBar"]
+margin_left = -25.5556
+margin_top = 23.3333
+margin_right = 23.4444
+margin_bottom = 37.3333
+percent_visible = false
+
+[node name="ExplosionArea" type="Area2D" parent="ExplosionGoblin" groups=["EnemyExplosion"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionGoblin/ExplosionArea"]
+position = Vector2( -0.4, -5.6 )
+shape = SubResource( 50 )
+disabled = true
+
+[node name="DetectionArea" type="Area2D" parent="ExplosionGoblin"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionGoblin/DetectionArea"]
+position = Vector2( -0.4, -5.6 )
+shape = SubResource( 51 )
 
 [connection signal="timeout" from="Goblin/DeathTimer" to="Goblin" method="_on_DeathTimer_timeout"]
 [connection signal="timeout" from="Goblin/DmgCDTimer" to="Goblin" method="_on_DmgCDTimer_timeout"]
@@ -288,3 +413,7 @@ wait_time = 2.0
 [connection signal="area_entered" from="BlowpipeGoblin/DetectionArea" to="BlowpipeGoblin" method="_on_DetectionArea_area_entered"]
 [connection signal="area_exited" from="BlowpipeGoblin/DetectionArea" to="BlowpipeGoblin" method="_on_DetectionArea_area_exited"]
 [connection signal="timeout" from="BlowpipeGoblin/ShootTimer" to="BlowpipeGoblin" method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="ExplosionGoblin/DeathTimer" to="ExplosionGoblin" method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="ExplosionGoblin/DmgCDTimer" to="ExplosionGoblin" method="_on_DmgCDTimer_timeout"]
+[connection signal="area_entered" from="ExplosionGoblin/ExplosionArea" to="ExplosionGoblin" method="_on_ExplosionArea_area_entered"]
+[connection signal="area_entered" from="ExplosionGoblin/DetectionArea" to="ExplosionGoblin" method="_on_DetectionArea_area_entered"]

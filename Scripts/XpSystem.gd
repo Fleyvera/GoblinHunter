@@ -96,7 +96,7 @@ func playerNumPos():
 	
 	
 	if get_parent().player2 == true:
-		$CanvasLayer/Layer.position.y = 45
+		$CanvasLayer/Layer.position.y = 25
 	
 	
 	pass

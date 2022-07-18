@@ -5,6 +5,12 @@ var secs = 0
 var mins = 0
 
 func _ready():
+	
+	if Global.players == 2:
+		$Label.rect_position = Vector2(430 , 57)
+	else:
+		$Label.rect_position = Vector2(430 , 30)
+	
 	pass 
 
 

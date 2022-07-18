@@ -138,6 +138,14 @@ func _on_Area2D_area_entered(area):
 		$DmgCDTimer.start()
 	
 	
+	if area.is_in_group("EnemyExplosion") and dmgCD == false:
+		life -= area.get_parent().explosionDamage
+		#Ativa cool down de dano
+		dmgCD = true
+		$Area2D/CollisionShape2D.set_deferred("disabled",true)
+		$AnimationPlayer.play("Hit")
+		$DmgCDTimer.start()
+	
 	pass 
 
 
