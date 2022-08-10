@@ -12,7 +12,7 @@ var anim = ""
 var dmgCD = false
 
 #Atributos
-var speed = 350
+var speed = 200
 
 var maxLife = 100
 

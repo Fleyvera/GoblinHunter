@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://Sprites/Goblin-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Goblin.gd" type="Script" id=2]
@@ -117,22 +117,6 @@ region = Rect2( 192, 64, 32, 32 )
 atlas = ExtResource( 7 )
 region = Rect2( 224, 64, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 7 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 7 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 7 )
-region = Rect2( 96, 0, 32, 32 )
-
 [sub_resource type="AtlasTexture" id=34]
 atlas = ExtResource( 7 )
 region = Rect2( 0, 32, 32, 32 )
@@ -149,6 +133,22 @@ region = Rect2( 64, 32, 32, 32 )
 atlas = ExtResource( 7 )
 region = Rect2( 96, 32, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 7 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 7 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 7 )
+region = Rect2( 96, 0, 32, 32 )
+
 [sub_resource type="SpriteFrames" id=19]
 animations = [ {
 "frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
@@ -156,15 +156,15 @@ animations = [ {
 "name": "Death",
 "speed": 12.0
 }, {
-"frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
-"loop": true,
-"name": "Walk",
-"speed": 8.0
-}, {
 "frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ) ],
 "loop": false,
 "name": "Shooting",
 "speed": 12.0
+}, {
+"frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 8.0
 } ]
 
 [sub_resource type="CircleShape2D" id=20]
@@ -229,6 +229,10 @@ radius = 35.2
 [sub_resource type="CircleShape2D" id=51]
 radius = 35.2568
 
+[sub_resource type="Gradient" id=52]
+offsets = PoolRealArray( 0.00584795, 0.426901, 0.725146, 0.988304 )
+colors = PoolColorArray( 0.772549, 0.8, 0.721569, 1, 0.745098, 0.584314, 0.360784, 1, 0.603922, 0.309804, 0.313726, 1, 0, 0, 0, 1 )
+
 [node name="EnemyPool" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -238,7 +242,7 @@ collision_layer = 7
 collision_mask = 7
 collision/safe_margin = 1.0
 script = ExtResource( 2 )
-speed = 175
+speed = 60
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goblin"]
 position = Vector2( 0, -3 )
@@ -260,7 +264,7 @@ frame = 1
 playing = true
 
 [node name="DeathTimer" type="Timer" parent="Goblin"]
-wait_time = 0.7
+wait_time = 0.6
 
 [node name="DmgCDTimer" type="Timer" parent="Goblin"]
 wait_time = 0.5
@@ -276,6 +280,7 @@ scale = Vector2( 0.3, 0.3 )
 z_index = -1
 
 [node name="LifeProgress" type="ProgressBar" parent="Goblin/LifeBar"]
+visible = false
 margin_left = -25.5556
 margin_top = 23.3333
 margin_right = 23.4444
@@ -287,7 +292,7 @@ scale = Vector2( 2.5, 2.5 )
 collision_layer = 7
 collision_mask = 7
 script = ExtResource( 6 )
-speed = 120
+speed = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlowpipeGoblin"]
 position = Vector2( -0.5, -1.6 )
@@ -309,7 +314,7 @@ frame = 3
 playing = true
 
 [node name="DeathTimer" type="Timer" parent="BlowpipeGoblin"]
-wait_time = 0.7
+wait_time = 0.6
 
 [node name="DmgCDTimer" type="Timer" parent="BlowpipeGoblin"]
 wait_time = 0.5
@@ -325,6 +330,7 @@ scale = Vector2( 0.3, 0.3 )
 z_index = -1
 
 [node name="LifeProgress" type="ProgressBar" parent="BlowpipeGoblin/LifeBar"]
+visible = false
 margin_left = -25.5556
 margin_top = 23.3333
 margin_right = 23.4444
@@ -349,7 +355,7 @@ collision_layer = 7
 collision_mask = 7
 collision/safe_margin = 1.0
 script = ExtResource( 8 )
-speed = 200
+speed = 70
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionGoblin"]
 position = Vector2( 0, -3 )
@@ -371,7 +377,6 @@ frame = 1
 playing = true
 
 [node name="DeathTimer" type="Timer" parent="ExplosionGoblin"]
-wait_time = 0.6
 
 [node name="DmgCDTimer" type="Timer" parent="ExplosionGoblin"]
 wait_time = 0.5
@@ -387,6 +392,7 @@ scale = Vector2( 0.3, 0.3 )
 z_index = -1
 
 [node name="LifeProgress" type="ProgressBar" parent="ExplosionGoblin/LifeBar"]
+visible = false
 margin_left = -25.5556
 margin_top = 23.3333
 margin_right = 23.4444
@@ -405,6 +411,26 @@ disabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionGoblin/DetectionArea"]
 position = Vector2( -0.4, -5.6 )
 shape = SubResource( 51 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ExplosionGoblin"]
+position = Vector2( 0, -3.2 )
+emitting = false
+amount = 500
+lifetime = 0.4
+one_shot = true
+randomness = 1.0
+lifetime_randomness = 1.0
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector2( 0, 5 )
+linear_accel = 800.0
+radial_accel = 600.0
+radial_accel_random = 1.0
+angle = 20.0
+scale_amount = 20.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 52 )
 
 [connection signal="timeout" from="Goblin/DeathTimer" to="Goblin" method="_on_DeathTimer_timeout"]
 [connection signal="timeout" from="Goblin/DmgCDTimer" to="Goblin" method="_on_DmgCDTimer_timeout"]

@@ -1,16 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Fonts/alagard.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/XpSystem.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/XpBar.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/XpBarXP.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 32.0156
-
-[sub_resource type="DynamicFont" id=4]
-size = 17
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -35,15 +31,6 @@ shape = SubResource( 2 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Layer" type="Node2D" parent="CanvasLayer"]
-visible = false
-
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Layer"]
-margin_left = 19.0
-margin_top = 7.0
-margin_right = 852.0
-margin_bottom = 24.0
-custom_fonts/font = SubResource( 4 )
-percent_visible = false
 
 [node name="Label" type="Label" parent="CanvasLayer/Layer"]
 margin_left = 864.0
@@ -52,6 +39,19 @@ margin_right = 959.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 1 )
 text = "Level 0"
+
+[node name="ProgressBar" type="TextureProgress" parent="CanvasLayer/Layer"]
+margin_left = 19.0
+margin_top = -4.0
+margin_right = 849.0
+margin_bottom = 36.0
+value = 100.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+texture_progress_offset = Vector2( 1, 0 )
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_right = 3
 
 [node name="PickUpArea" type="Area2D" parent="."]
 

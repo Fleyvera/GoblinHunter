@@ -153,18 +153,34 @@ func _on_ConfirmButton_pressed():
 	if selected == 1:
 		$CanvasLayer/Up1.get_child(1).UpgradeSpawner()
 		get_tree().paused = false
-		queue_free()
+		$CanvasLayer.hide()
+		Engine.time_scale = 0.2
+		$Timer.start()
 	if selected == 2:
 		$CanvasLayer/Up2.get_child(1).UpgradeSpawner()
 		get_tree().paused = false
-		queue_free()
+		$CanvasLayer.hide()
+		Engine.time_scale = 0.2
+		$Timer.start()
 	if selected == 3:
 		$CanvasLayer/Up3.get_child(1).UpgradeSpawner()
 		get_tree().paused = false
-		queue_free()
+		$CanvasLayer.hide()
+		Engine.time_scale = 0.2
+		$Timer.start()
+
 	
 	
 	
 	pass 
 
 
+
+
+func _on_Timer_timeout():
+	
+	
+	Engine.time_scale = 1
+	queue_free()
+	
+	pass 

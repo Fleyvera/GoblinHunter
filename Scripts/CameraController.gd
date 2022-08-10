@@ -40,12 +40,12 @@ func Follow(delta):
 		
 		if distance >= 900:
 			$Camera2D.zoom += Vector2(0.01 , 0.01)
-			if $Camera2D.zoom >= Vector2(1.8 , 1.8):
-				$Camera2D.zoom = Vector2(1.8 , 1.8)
+			if $Camera2D.zoom >= Vector2(2.0 , 2.0):
+				$Camera2D.zoom = Vector2(2.0 , 2.0)
 		else:
 			$Camera2D.zoom -= Vector2(0.01 , 0.01)
-			if $Camera2D.zoom <= Vector2(1.6 , 1.6):
-				$Camera2D.zoom = Vector2(1.6 , 1.6)
+			if $Camera2D.zoom <= Vector2(2.2 , 2.2):
+				$Camera2D.zoom = Vector2(2.2 , 2.2)
 		
 		if distance >= 1700:
 			players.get_child(0).global_position = global_position - Vector2(20 , 0)

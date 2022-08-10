@@ -148,10 +148,10 @@ func Death():
 		$CollisionShape2D.set_deferred("disabled",true)
 		$Area2D/CollisionShape2D.set_deferred("disabled",true)
 		yield(get_tree().create_timer(0.4) , "timeout")
-		$AnimatedSprite.scale = Vector2(3,3)
-		$AnimatedSprite.position.y = -24
+		$AnimatedSprite.hide()
+		$CPUParticles2D.emitting = true
 		$ExplosionArea/CollisionShape2D.set_deferred("disabled",false)
-		
+		get_parent().get_node("EnemySpawner").enemysOnGame -= 1
 		pass
 	
 	pass

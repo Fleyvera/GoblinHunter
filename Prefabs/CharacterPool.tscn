@@ -1,13 +1,18 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scripts/Knight.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Characters/Knight-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/CharacterPool.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/Weapon.gd" type="Script" id=4]
 [ext_resource path="res://Prefabs/XpSystem.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Sprites/Dust.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/LifeBar.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Characters/Wizard-Sheet.png" type="Texture" id=7]
 [ext_resource path="res://Scripts/Wizard.gd" type="Script" id=8]
+[ext_resource path="res://Sprites/LifeBarMolde.png" type="Texture" id=9]
+
+[sub_resource type="Gradient" id=36]
+offsets = PoolRealArray( 0.0409357, 0.959064 )
+colors = PoolColorArray( 0.772549, 0.8, 0.721569, 1, 0.603922, 0.603922, 0.592157, 1 )
 
 [sub_resource type="CircleShape2D" id=11]
 radius = 4.2
@@ -210,15 +215,16 @@ script = ExtResource( 1 )
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Knight"]
 position = Vector2( 0, 7.2 )
 z_index = -2
-amount = 10
-lifetime = 0.3
+amount = 5
+lifetime = 0.5
+randomness = 1.0
 local_coords = false
-texture = ExtResource( 6 )
 emission_shape = 1
 emission_sphere_radius = 3.0
 gravity = Vector2( 0, 0 )
-scale_amount = 2.0
+scale_amount = 6.0
 scale_amount_random = 1.0
+color_ramp = SubResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Knight"]
 position = Vector2( 0, 6.2 )
@@ -234,12 +240,16 @@ visible = false
 position = Vector2( 0, 2 )
 scale = Vector2( 0.3, 0.3 )
 
-[node name="LifeProgress" type="ProgressBar" parent="Knight/LifeBar"]
-margin_left = -25.3333
-margin_top = 23.3333
-margin_right = 23.6667
-margin_bottom = 37.3333
-percent_visible = false
+[node name="LifeProgress" type="TextureProgress" parent="Knight/LifeBar"]
+margin_left = -24.0
+margin_top = -79.3333
+margin_right = 8.0
+margin_bottom = -47.3333
+rect_scale = Vector2( 1.5, 1.5 )
+value = 100.0
+texture_under = ExtResource( 9 )
+texture_progress = ExtResource( 6 )
+texture_progress_offset = Vector2( 4, 0 )
 
 [node name="Area2D" type="Area2D" parent="Knight" groups=["Player"]]
 
@@ -274,15 +284,16 @@ script = ExtResource( 8 )
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Wizard"]
 position = Vector2( 0, 7.2 )
 z_index = -2
-amount = 10
-lifetime = 0.3
+amount = 5
+lifetime = 0.5
+randomness = 1.0
 local_coords = false
-texture = ExtResource( 6 )
 emission_shape = 1
 emission_sphere_radius = 3.0
 gravity = Vector2( 0, 0 )
-scale_amount = 2.0
+scale_amount = 6.0
 scale_amount_random = 1.0
+color_ramp = SubResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wizard"]
 position = Vector2( 0, 6.2 )
@@ -299,12 +310,16 @@ visible = false
 position = Vector2( 0, 2 )
 scale = Vector2( 0.3, 0.3 )
 
-[node name="LifeProgress" type="ProgressBar" parent="Wizard/LifeBar"]
-margin_left = -25.3333
-margin_top = 23.3333
-margin_right = 23.6667
-margin_bottom = 37.3333
-percent_visible = false
+[node name="LifeProgress" type="TextureProgress" parent="Wizard/LifeBar"]
+margin_left = -24.0
+margin_top = -79.3333
+margin_right = 8.0
+margin_bottom = -47.3333
+rect_scale = Vector2( 1.5, 1.5 )
+value = 100.0
+texture_under = ExtResource( 9 )
+texture_progress = ExtResource( 6 )
+texture_progress_offset = Vector2( 4, 0 )
 
 [node name="Area2D" type="Area2D" parent="Wizard" groups=["Player"]]
 
@@ -316,7 +331,7 @@ visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 10 )
 animation = "Idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="DmgCDTimer" type="Timer" parent="Wizard"]

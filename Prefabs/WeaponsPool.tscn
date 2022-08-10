@@ -1,10 +1,93 @@
 [gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/WaponsPool.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/BigSword.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/Weapons/BigSword-Sheet.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Wand.gd" type="Script" id=4]
 [ext_resource path="res://icon.png" type="Texture" id=5]
+
+[sub_resource type="GDScript" id=11]
+script/source = "extends Node2D
+
+
+var inGame = false
+
+
+var attacking = false
+
+var damage = 20.0
+
+var speed = 3.0
+
+
+func _ready():
+	$Timer.start()
+	pass 
+
+
+func LimitSystem():
+	
+	$Timer.wait_time = speed
+	
+	if speed <= 0.7:
+		speed = 0.7
+	
+	
+	
+	pass
+
+
+func _process(delta):
+	
+	
+	
+	LimitSystem()
+	
+	attack()
+	pass
+
+
+
+func _on_Timer_timeout():
+	
+	#attack visual
+	
+	$AnimatedSprite.visible = true
+	$AnimatedSprite.play(\"Attack\")
+	attacking = true
+	yield(get_tree().create_timer(0.7) , \"timeout\")
+	attacking = false
+	$AnimatedSprite.stop()
+	$AnimatedSprite.frame = 0
+	$AnimatedSprite.visible = false
+	$Timer.start()
+	
+	
+	pass
+
+
+func attack():
+	
+	if attacking == true:
+		yield(get_tree().create_timer(0.5) , \"timeout\")
+		$Area2D/CollisionShape2D.set_deferred(\"disabled\",false)
+		yield(get_tree().create_timer(0.1) , \"timeout\")
+		$Area2D/CollisionShape2D.set_deferred(\"disabled\",true)
+	
+	
+
+
+func _on_Area2D_body_entered(body):
+	
+	
+	if body.is_in_group(\"Enemy\"):
+		
+		
+		body.call_deferred(\"Damage\" , damage)
+	
+	
+	
+	pass 
+"
 
 [sub_resource type="CircleShape2D" id=9]
 radius = 14.0
@@ -54,7 +137,7 @@ script = ExtResource( 1 )
 [node name="BigSword" type="Node2D" parent="."]
 scale = Vector2( 3, 3 )
 z_index = 2
-script = ExtResource( 2 )
+script = SubResource( 11 )
 __meta__ = {
 "_edit_group_": true
 }

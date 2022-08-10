@@ -71,7 +71,12 @@ pause_mode = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Up3/Up3Area"]
 shape = SubResource( 1 )
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="pressed" from="CanvasLayer/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]
 [connection signal="area_entered" from="CanvasLayer/Up1/Up1Area" to="." method="_on_Up1Area_area_entered"]
 [connection signal="area_entered" from="CanvasLayer/Up2/Up2Area" to="." method="_on_Up2Area_area_entered"]
 [connection signal="area_entered" from="CanvasLayer/Up3/Up3Area" to="." method="_on_Up3Area_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

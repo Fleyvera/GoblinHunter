@@ -145,6 +145,7 @@ func Death():
 		speed = 0
 		$CollisionShape2D.set_deferred("disabled",true)
 		$Area2D/CollisionShape2D.set_deferred("disabled",true)
+		get_parent().get_node("EnemySpawner").enemysOnGame -= 1
 		
 		pass
 	
