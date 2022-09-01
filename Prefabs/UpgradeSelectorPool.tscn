@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/UpgradeSelectorPool.gd" type="Script" id=1]
-[ext_resource path="res://Fonts/alagard.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Sprites/Upgrades/Thunder-Sheet.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Selectors.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/Upgrades/Shuriken.png" type="Texture" id=5]
@@ -9,11 +8,17 @@
 [ext_resource path="res://Sprites/Upgrades/LifePotion.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Upgrades/Feather.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Upgrades/Ring.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/UpgradeFrame.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/UpgradeDescFrame.png" type="Texture" id=11]
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://Fonts/alagard.ttf"
 
 [sub_resource type="DynamicFont" id=11]
-outline_size = 2
+size = 80
+outline_size = 10
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 2 )
+font_data = SubResource( 4 )
 
 [node name="UpgradeSelectorPool" type="Node2D"]
 script = ExtResource( 1 )
@@ -23,37 +28,49 @@ scale = Vector2( 3, 3 )
 script = ExtResource( 4 )
 upgrade_name = "ThunderLord"
 
-[node name="Description" type="Label" parent="ThunderLordSelector"]
-margin_left = -52.3333
-margin_top = 22.3333
-margin_right = 157.667
-margin_bottom = 55.3333
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 11 )
-text = "Cast a Thunder arround you
-"
-
 [node name="Title" type="Label" parent="ThunderLordSelector"]
-margin_left = -23.6667
-margin_top = -29.0
-margin_right = 71.3333
-margin_bottom = -14.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = -24.0
+margin_top = -32.0
+margin_right = 466.0
+margin_bottom = 43.0
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = SubResource( 11 )
-text = "Thunderlord"
+text = "ThunderLord"
 align = 1
 
-[node name="Panel" type="Panel" parent="ThunderLordSelector"]
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
+[node name="Panel" type="Sprite" parent="ThunderLordSelector"]
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 10 )
 
 [node name="Icon" type="Sprite" parent="ThunderLordSelector/Panel"]
-position = Vector2( 20, 20 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 133.549, 0.854416, 21.0759, 31.3211 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ThunderLordSelector"]
+margin_left = -20.5
+margin_top = 20.5
+margin_right = 20.5
+margin_bottom = 44.5
+texture = ExtResource( 11 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Control" type="Control" parent="ThunderLordSelector/NinePatchRect"]
+
+[node name="Description" type="Label" parent="ThunderLordSelector/NinePatchRect/Control"]
+margin_left = 5.833
+margin_top = 4.5
+margin_right = 540.833
+margin_bottom = 157.5
+rect_scale = Vector2( 0.055, 0.055 )
+custom_fonts/font = SubResource( 11 )
+text = "ThunderLordDesc"
+align = 1
+autowrap = true
 
 [node name="NinjaSelector" type="Node2D" parent="."]
 scale = Vector2( 3, 3 )
@@ -61,37 +78,48 @@ script = ExtResource( 4 )
 upgrade_name = "Ninja"
 upgrade_num = 1
 
-[node name="Description" type="Label" parent="NinjaSelector"]
-margin_left = -52.3333
-margin_top = 22.3333
-margin_right = 157.667
-margin_bottom = 55.3333
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 11 )
-text = "Create a Shurinken
-"
-align = 1
-
 [node name="Title" type="Label" parent="NinjaSelector"]
-margin_left = -23.6667
-margin_top = -29.0
-margin_right = 71.3333
-margin_bottom = -14.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = -9.33334
+margin_top = -32.0
+margin_right = 180.667
+margin_bottom = 43.0
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = SubResource( 11 )
 text = "Ninja"
 align = 1
 
-[node name="Panel" type="Panel" parent="NinjaSelector"]
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
+[node name="Panel" type="Sprite" parent="NinjaSelector"]
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 10 )
 
 [node name="Icon" type="Sprite" parent="NinjaSelector/Panel"]
-position = Vector2( 20, 20 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
 region_rect = Rect2( 133.549, 0.854416, 21.0759, 31.3211 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NinjaSelector"]
+margin_left = -20.5
+margin_top = 20.5
+margin_right = 20.5
+margin_bottom = 44.5
+texture = ExtResource( 11 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Control" type="Control" parent="NinjaSelector/NinePatchRect"]
+
+[node name="Description" type="Label" parent="NinjaSelector/NinePatchRect/Control"]
+margin_left = 2.0
+margin_top = 4.5
+margin_right = 663.0
+margin_bottom = 79.5
+rect_scale = Vector2( 0.055, 0.055 )
+custom_fonts/font = SubResource( 11 )
+text = "NinjaDesc"
+align = 1
+autowrap = true
 
 [node name="LifePotionSelector" type="Node2D" parent="."]
 scale = Vector2( 3, 3 )
@@ -99,36 +127,48 @@ script = ExtResource( 4 )
 upgrade_name = "Life Potion"
 upgrade_num = 2
 
-[node name="Description" type="Label" parent="LifePotionSelector"]
-margin_left = -52.0
-margin_top = 22.0
-margin_right = 158.0
-margin_bottom = 37.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 11 )
-text = "Fill your life"
-align = 1
-
 [node name="Title" type="Label" parent="LifePotionSelector"]
-margin_left = -23.6667
-margin_top = -29.0
-margin_right = 71.3333
-margin_bottom = -14.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = -19.667
+margin_top = -32.0
+margin_right = 380.333
+margin_bottom = 43.0
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = SubResource( 11 )
-text = "Life Potion"
+text = "LifePotion"
 align = 1
 
-[node name="Panel" type="Panel" parent="LifePotionSelector"]
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
+[node name="Panel" type="Sprite" parent="LifePotionSelector"]
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 10 )
 
 [node name="Icon" type="Sprite" parent="LifePotionSelector/Panel"]
-position = Vector2( 20, 20 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 region_rect = Rect2( 133.549, 0.854416, 21.0759, 31.3211 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LifePotionSelector"]
+margin_left = -20.5
+margin_top = 20.5
+margin_right = 20.5
+margin_bottom = 44.5
+texture = ExtResource( 11 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Control" type="Control" parent="LifePotionSelector/NinePatchRect"]
+
+[node name="Description" type="Label" parent="LifePotionSelector/NinePatchRect/Control"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 566.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.055, 0.055 )
+custom_fonts/font = SubResource( 11 )
+text = "LifePotionDesc"
+align = 1
+autowrap = true
 
 [node name="DamageSelector" type="Node2D" parent="."]
 scale = Vector2( 3, 3 )
@@ -136,36 +176,48 @@ script = ExtResource( 4 )
 upgrade_name = "Fang Neckler"
 upgrade_num = 3
 
-[node name="Description" type="Label" parent="DamageSelector"]
-margin_left = -52.0
-margin_top = 22.0
-margin_right = 158.0
-margin_bottom = 37.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 11 )
-text = "Increase your basic damage"
-align = 1
-
 [node name="Title" type="Label" parent="DamageSelector"]
-margin_left = -23.6667
-margin_top = -29.0
-margin_right = 71.3333
-margin_bottom = -14.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = -24.6667
+margin_top = -32.0
+margin_right = 475.333
+margin_bottom = 43.0
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = SubResource( 11 )
-text = "Fang Neckler"
+text = "FangNeckler"
 align = 1
 
-[node name="Panel" type="Panel" parent="DamageSelector"]
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
+[node name="Panel" type="Sprite" parent="DamageSelector"]
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 10 )
 
 [node name="Icon" type="Sprite" parent="DamageSelector/Panel"]
-position = Vector2( 20, 20 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 region_rect = Rect2( 133.549, 0.854416, 21.0759, 31.3211 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="DamageSelector"]
+margin_left = -20.5
+margin_top = 20.5
+margin_right = 20.5
+margin_bottom = 44.5
+texture = ExtResource( 11 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Control" type="Control" parent="DamageSelector/NinePatchRect"]
+
+[node name="Description" type="Label" parent="DamageSelector/NinePatchRect/Control"]
+margin_left = 4.0
+margin_top = 4.5
+margin_right = 601.0
+margin_bottom = 157.5
+rect_scale = Vector2( 0.055, 0.055 )
+custom_fonts/font = SubResource( 11 )
+text = "FangNecklerDesc"
+align = 1
+autowrap = true
 
 [node name="HarpyFeatherSelector" type="Node2D" parent="."]
 scale = Vector2( 3, 3 )
@@ -173,36 +225,48 @@ script = ExtResource( 4 )
 upgrade_name = "Harpy Feather"
 upgrade_num = 4
 
-[node name="Description" type="Label" parent="HarpyFeatherSelector"]
-margin_left = -52.0
-margin_top = 22.0
-margin_right = 158.0
-margin_bottom = 37.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 11 )
-text = "Increase your move speed"
-align = 1
-
 [node name="Title" type="Label" parent="HarpyFeatherSelector"]
-margin_left = -23.6667
-margin_top = -29.0
-margin_right = 71.3333
-margin_bottom = -14.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = -26.3333
+margin_top = -32.0
+margin_right = 503.667
+margin_bottom = 43.0
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = SubResource( 11 )
-text = "Harpy Feather"
+text = "HarpyFeather"
 align = 1
 
-[node name="Panel" type="Panel" parent="HarpyFeatherSelector"]
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
+[node name="Panel" type="Sprite" parent="HarpyFeatherSelector"]
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 10 )
 
 [node name="Icon" type="Sprite" parent="HarpyFeatherSelector/Panel"]
-position = Vector2( 20, 20 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 region_rect = Rect2( 133.549, 0.854416, 21.0759, 31.3211 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HarpyFeatherSelector"]
+margin_left = -20.5
+margin_top = 20.5
+margin_right = 20.5
+margin_bottom = 44.5
+texture = ExtResource( 11 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Control" type="Control" parent="HarpyFeatherSelector/NinePatchRect"]
+
+[node name="Description" type="Label" parent="HarpyFeatherSelector/NinePatchRect/Control"]
+margin_left = 4.0
+margin_top = 4.5
+margin_right = 607.0
+margin_bottom = 157.5
+rect_scale = Vector2( 0.055, 0.055 )
+custom_fonts/font = SubResource( 11 )
+text = "HarpyFeatherDesc"
+align = 1
+autowrap = true
 
 [node name="ElectricRingSelector" type="Node2D" parent="."]
 scale = Vector2( 3, 3 )
@@ -210,33 +274,45 @@ script = ExtResource( 4 )
 upgrade_name = "Eletric Ring"
 upgrade_num = 5
 
-[node name="Description" type="Label" parent="ElectricRingSelector"]
-margin_left = -52.0
-margin_top = 22.0
-margin_right = 158.0
-margin_bottom = 37.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 11 )
-text = "Increase your attack speed"
-align = 1
-
 [node name="Title" type="Label" parent="ElectricRingSelector"]
-margin_left = -23.6667
-margin_top = -29.0
-margin_right = 71.3333
-margin_bottom = -14.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = -22.0
+margin_top = -32.0
+margin_right = 423.0
+margin_bottom = 43.0
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = SubResource( 11 )
-text = "Eletric Ring"
+text = "EletricRing"
 align = 1
 
-[node name="Panel" type="Panel" parent="ElectricRingSelector"]
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
+[node name="Panel" type="Sprite" parent="ElectricRingSelector"]
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 10 )
 
 [node name="Icon" type="Sprite" parent="ElectricRingSelector/Panel"]
-position = Vector2( 20, 20 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 9 )
 region_rect = Rect2( 133.549, 0.854416, 21.0759, 31.3211 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ElectricRingSelector"]
+margin_left = -20.5
+margin_top = 20.5
+margin_right = 20.5
+margin_bottom = 44.5
+texture = ExtResource( 11 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Control" type="Control" parent="ElectricRingSelector/NinePatchRect"]
+
+[node name="Description" type="Label" parent="ElectricRingSelector/NinePatchRect/Control"]
+margin_left = 5.0
+margin_top = 4.5
+margin_right = 577.0
+margin_bottom = 157.5
+rect_scale = Vector2( 0.055, 0.055 )
+custom_fonts/font = SubResource( 11 )
+text = "EletricRingDesc"
+align = 1
+autowrap = true

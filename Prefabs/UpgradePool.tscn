@@ -71,7 +71,6 @@ visible = false
 scale = Vector2( 3, 3 )
 frames = SubResource( 10 )
 animation = "Idle"
-frame = 7
 playing = true
 
 [node name="Area2D" type="Area2D" parent="ThunderLord" groups=["Weapon"]]

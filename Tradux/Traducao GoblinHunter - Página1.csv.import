@@ -1,0 +1,16 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+
+[deps]
+
+files=[ "res://Tradux/Traducao GoblinHunter - Página1.pt_BR.translation", "res://Tradux/Traducao GoblinHunter - Página1.en.translation" ]
+
+source_file="res://Tradux/Traducao GoblinHunter - Página1.csv"
+dest_files=[ "res://Tradux/Traducao GoblinHunter - Página1.pt_BR.translation", "res://Tradux/Traducao GoblinHunter - Página1.en.translation" ]
+
+[params]
+
+compress=true
+delimiter=0

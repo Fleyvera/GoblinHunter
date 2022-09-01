@@ -95,3 +95,14 @@ func _on_CheckBox_toggled(button_pressed):
 	else:
 		resolution.disabled = false
 	pass 
+
+
+func _on_Localization_item_selected(index):
+	
+	if index == 0:
+		TranslationServer.set_locale('en')
+	if index == 1:
+		TranslationServer.set_locale('pt_BR')
+	
+	
+	pass 

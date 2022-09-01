@@ -156,6 +156,7 @@ Confirm={
 [locale]
 
 locale_filter=[ 1, [ "en", "pt_BR" ] ]
+translations=PoolStringArray( "res://Tradux/Traducao GoblinHunter - Página1.en.translation", "res://Tradux/Traducao GoblinHunter - Página1.pt_BR.translation" )
 
 [physics]
 
